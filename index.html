@@ -521,14 +521,14 @@ color: gold;
         <!-- Founder's Thoughts Swiper Carousel Section -->
   <section id="foundersthoughts-carousel" class="swiper mySwiper">
     <h2 style="text-align: center; color: #FFDE59; font-size: 48px; font-family: 'Archivo Black', sans-serif; padding-bottom: 20px;">Founder's Thoughts</h2>
-    <div class="swiper-wrapper">
+    <div class="swiper-wrapper-b">
       <!-- Slides will be populated via JavaScript -->
     </div>
     <!-- Add optional navigation buttons -->
-    <div class="swiper-button-next" style="color: #FFDE5A;"></div>
-    <div class="swiper-button-prev " style="color: #FFDE5A;"></div>
+    <div class="swiper-button-next-b" style="color: #FFDE5A;"></div>
+    <div class="swiper-button-prev-b" style="color: #FFDE5A;"></div>
     <!-- Swiper pagination -->
-    <div class="swiper-pagination"></div>
+    <div class="swiper-pagination-b"></div>
   </section>
 
   <!-- Stock Market Game Section -->
@@ -832,10 +832,80 @@ color: gold;
         description: 'The BRICS countries represent a significant portion of the worlds population and landmass...',
         link: 'impactOfBRICSOnFinance.html'
       },
+      {
+        image: 'images/foundersThoughts/founderThought12.png',
+        title: 'Geopolitics on Finance: Impact of upcoming US election on Financial Markets',
+        date: 'November 10th, 2023',
+        description: 'Every four years, the United States holds its presidential election, earning attention worldwide...',
+        link: 'impactOfUSElectionsOnFinance.html'
+      },
+      {
+        image: 'images/foundersThoughts/founderThought11.png',
+        title: 'Geopolitics on Finance: Impact of Israel-Hamas war on Financial Markets',
+        date: 'October 27th, 2023',
+        description: 'The world was shocked when conflict erupted in the delicate Middle East early this month...',
+        link: 'israelHamasWarOnFinance.html'
+      },
+      {
+        image: 'images/foundersThoughts/founderThought10.png',
+        title: 'Geopolitics on Finance: Impact of Russia-Ukraine war on Financial Markets',
+        date: 'October 13th, 2023',
+        description: 'With the world still recovering from the COVID-19 pandemic, Russia took the world by surprise...',
+        link: 'russiaUkraineWarOnFinance.html'
+      },
+      {
+        image: 'images/foundersThoughts/founderThought7.png',
+        title: 'Impact Investing: Evolution of Diversity, Equity and Inclusion',
+        date: 'September 29th, 2023',
+        description: 'A huge focus of impact investing is diversity, equity, and inclusion. These factors measure how...',
+        link: 'impactInvestingAndDEI.html'
+      },
+      {
+        image: 'images/foundersThoughts/founderThought6.png',
+        title: 'Impact Investing: How impact investing has an effect on poverty?',
+        date: 'September 15th, 2023',
+        description: 'Impact Investing is the new hot buzzword in finance, but those who have been focused on sustainable finance...',
+        link: 'impactInvestingAndPoverty.html'
+      },
+      {
+        image: 'images/foundersThoughts/founderThought5.png',
+        title: 'College: High paying career paths',
+        date: 'September 1st, 2023',
+        description: 'With the debate of the value of a college education financially circulating, many fail to consider...',
+        link: 'careerPaths.html'
+      },
+      {
+        image: 'images/foundersThoughts/founderThought4.png',
+        title: 'College: Financial Options for sponsoring your college education',
+        date: 'August 18th, 2023',
+        description: 'For most people intending to attend college, their largest issue is financially sponsoring their education...',
+        link: 'collegeFinance.html'
+      },
+      {
+        image: 'images/foundersThoughts/founderThought3.png',
+        title: 'College: Is college education worth the time and money?',
+        date: 'August 4th, 2023',
+        description: 'Recently, debate has sparked on whether or not a college education is worth...',
+        link: 'isCollegeWorthIt.html'
+      },
+      {
+        image: 'images/foundersThoughts/founderThought2.png',
+        title: 'Investing Strategies for Teens and Young Adults: Retirement',
+        date: 'July 21st, 2023',
+        description: 'Retirement is a stage of life that most people look forward to...',
+        link: 'invStratRetirement.html'
+      },
+      {
+        image: 'images/foundersThoughts/founderThought1.png',
+        title: 'Investing Strategies for Teens and Young Adults: College',
+        date: 'July 7th, 2023',
+        description: 'Today, paying for a college education is no longer a walk in the park...',
+        link: 'invStratCollege.html'
+      }
     ];
 
     // Get the Swiper wrapper
-    const swiperWrapper = document.querySelector('.swiper-wrapper');
+    const swiperWrapper = document.querySelector('.swiper-wrapper-b');
 
     // Loop through blogs and create slides
     blogs.forEach(blog => {
@@ -869,12 +939,12 @@ color: gold;
         disableOnInteraction: false,
       },
       pagination: {
-        el: '.swiper-pagination',
+        el: '.swiper-pagination-b',
         clickable: true,
       },
       navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: '.swiper-button-next-b',
+        prevEl: '.swiper-button-prev-b',
       },
       spaceBetween: 20,  // Space between slides
       slidesPerView: 1,   // Number of slides visible at a time
