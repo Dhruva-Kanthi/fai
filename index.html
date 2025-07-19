@@ -54,38 +54,8 @@
   padding: 1rem;
   flex-grow: 1; /* Ensures the content fills the available space */
 }
-s
+
 .blog-card h2 {
-  font-family: 'Archivo Black', sans-serif;
-  font-size: 1.5rem;
-  color: #FFDE5A;
-  margin-bottom: 10px;
-}
-
-.founder-card {
-  display: flex;
-  flex-direction: column; /* Flexbox for vertical alignment */
-  background-color: #1c1c1c;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 80vw;
-  height: 100%; /* Make sure the blog card takes full height */
-  overflow: hidden;
-}
-
-.founder-card img {
-  width: 100%;
-  object-fit: cover;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-
-.founder-card .content {
-  padding: 1rem;
-  flex-grow: 1; /* Ensures the content fills the available space */
-}
-
-.founder-card h2 {
   font-family: 'Archivo Black', sans-serif;
   font-size: 1.5rem;
   color: #FFDE5A;
@@ -246,10 +216,6 @@ color: gold;
   padding-top: 40px; /* Adjust the value as needed (e.g., 40px) */
 }
 
-#foundersthoughts-carousel {
-  padding-top: 40px; /* Adjust the value as needed (e.g., 40px) */
-}
-
 /* Swiper Carousel Styling */
 .swiper {
   width: 100%;
@@ -297,93 +263,6 @@ color: gold;
   margin-top: auto;
 }
 
-.founder-card {
-  display: flex;
-  flex-direction: column;
-  background-color: #1c1c1c;
-  border-radius: 10px;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.founder-card .image-container {
-  width: 100%;
-  height: 150px; /* Fixed height for the image container */
-  overflow: hidden;
-}
-
-.founder-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.founder-card .content {
-  flex-grow: 1;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Founder's Thoughts Swiper Carousel Styling */
-.swiper-b {
-  width: 100%;
-  height: auto;
-  padding-bottom: 50px;
-}
-
-.swiper-wrapper-b {
-  display: flex;
-}
-
-.swiper-slide-b {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-}
-
-.founder-card {
-  display: flex;
-  flex-direction: column;
-  background-color: #1c1c1c;
-  border-radius: 10px;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.founder-card .image-container {
-  width: 100%;
-  height: 150px;
-  overflow: hidden;
-}
-
-.founder-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.founder-card .content {
-  flex-grow: 1;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Dedicated Navigation Buttons */
-.swiper-button-next-b,
-.swiper-button-prev-b {
-  color: #FFDE5A;
-}
-
-/* Dedicated Pagination Dots */
-.swiper-pagination-b {
-  bottom: 10px;
-}
 </style>
 
 
@@ -593,7 +472,10 @@ color: gold;
   <h2 style="text-align: center; color: #FFDE59; font-size: 48px; font-family: 'Archivo Black', sans-serif; padding-bottom: 20px;">Blog</h2>
 
 
-  <div class="swiper-wrapper"></div>
+  <div class="swiper-wrapper">
+    <!-- Slides will be populated via JavaScript -->
+  </div>
+  <!-- Add optional navigation buttons -->
   <div class="swiper-button-next" style="color: #FFDE5A;"></div>
   <div class="swiper-button-prev " style="color: #FFDE5A;"></div>
   <!-- Swiper pagination -->
@@ -619,7 +501,10 @@ color: gold;
   </div>
 </div>
 
-
+    
+    
+  
+  
   <!-- Guest Lectures Section -->
   <div class="py-16 px-8 bg-[#FFDE59] md:flex justify-center items-center">
     <div class="md:w-1/2">
@@ -636,18 +521,18 @@ color: gold;
     </div>
   </div>
   
-  <!-- Founder's Thoughts Swiper Carousel Section -->
-<section id="foundersthoughts-carousel" class="swiper-b">
-  <h2 style="text-align: center; color: #FFDE59; font-size: 48px; font-family: 'Archivo Black', sans-serif; padding-bottom: 20px;">Founder's Thoughts</h2>
-  <div class="swiper-wrapper">
-    <!-- Slides will be populated via JavaScript -->
-  </div>
-  <!-- Unique navigation buttons -->
-  <div class="swiper-button-next-b" style="color: #FFDE5A;"></div>
-  <div class="swiper-button-prev-b" style="color: #FFDE5A;"></div>
-  <!-- Unique Swiper pagination -->
-  <div class="swiper-pagination-b"></div>
-</section>
+  <!-- Founders' Thoughts Swiper Carousel Section -->
+  <section id="founders-carousel" class="swiper foundersSwiper">
+    <h2 style="text-align: center; color: #FFDE59; font-size: 48px; font-family: 'Archivo Black', sans-serif; padding-bottom: 20px;">Founders' Thoughts</h2>
+
+    <div class="swiper-wrapper">
+      <!-- Slides will be populate by JS -->
+    </div>
+
+    <div class="swiper-button-next" style="color: #FFDE5A;"></div>
+    <div class="swiper-button-prev" style="color: #FFDE5A;"></div>
+    <div class="swiper-pagination"></div>
+  </section>
 
   <!-- Stock Market Game Section -->
   <div class="bg-black text-white py-8 px-8 flex lg:flex-row flex-col-reverse justify-center items-center">
@@ -774,42 +659,192 @@ color: gold;
 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
 <script>
-  // Function to load blog content into the homepage carousel
-  function loadBlogsToCarousel() {
-    // Blog content structure from your blog page
-    const blogs = [
-      {
-        image: 'images/professionals.jpeg',
-        title: "FAI's Upcoming Guest Lectures & What to Expect",
-        date: 'March 1st, 2024',
-        description: 'FAI has teamed up with professionals in the finance field to host guest lectures...',
-        link: 'blog_plans.html'
-      },
-      {
-        image: 'images/libraryinindia.jpg',
-        title: 'Library Fundraiser in India',
-        date: 'February 9th, 2024',
-        description: 'FAI members raised donations to fund a library in India to provide access to education...',
-        link: 'blog_library.html'
-      },
-      {
-        image: 'images/sustainableinv.jpeg',
-        title: 'Sustainable Investing',
-        date: 'November 2nd, 2023',
-        description: 'FAI believes in sustainable investing to secure the environment for future generations...',
-        link: 'blog_sustainableinv.html'
-      },
-      {
-        image: 'images/fin-literacy.gif',
-        title: 'Financial Literacy for K-12',
-        date: 'August 14th, 2023',
-        description: 'The need for financial literacy programs is undeniable. 87% of teens don’t understand personal finances...',
-        link: 'blog_finliteracy.html'
-      }
-    ];
+  // Blog content structure from your blog page
+  const blogs = [
+    {
+      image: 'images/professionals.jpeg',
+      title: "FAI's Upcoming Guest Lectures & What to Expect",
+      date: 'March 1st, 2024',
+      description: 'FAI has teamed up with professionals in the finance field to host guest lectures...',
+      link: 'blog_plans.html'
+    },
+    {
+      image: 'images/libraryinindia.jpg',
+      title: 'Library Fundraiser in India',
+      date: 'February 9th, 2024',
+      description: 'FAI members raised donations to fund a library in India to provide access to education...',
+      link: 'blog_library.html'
+    },
+    {
+      image: 'images/sustainableinv.jpeg',
+      title: 'Sustainable Investing',
+      date: 'November 2nd, 2023',
+      description: 'FAI believes in sustainable investing to secure the environment for future generations...',
+      link: 'blog_sustainableinv.html'
+    },
+    {
+      image: 'images/fin-literacy.gif',
+      title: 'Financial Literacy for K-12',
+      date: 'August 14th, 2023',
+      description: 'The need for financial literacy programs is undeniable. 87% of teens dont understand personal finances...',
+      link: 'blog_finliteracy.html'
+    }
+  ];
 
+  const founders = [
+  {
+    image: 'images/foundersThoughts/ai.png',
+      title: "The Effect of AI on Financial Markets",
+      date: 'February 22nd, 2025',
+      description: 'Artificial Intelligence (AI) is rapidly transforming the financial markets, revolutionizing everything from trading strategies...',
+      link: 'ai.html'
+    },
+    {
+      image: 'images/foundersThoughts/election.png',
+      title: 'The Financial Impact of the 2024 Election',
+      date: 'November 18th, 2024',
+      description: 'The 2024 U.S. presidential election, which saw Donald Trump return to office...',
+      link: 'election.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought9.png',
+      title: 'Impact Investing: Achieving Both Financial Returns and Social Impact',
+      date: 'March 29th, 2024',
+      description: 'For many investors, simply making returns on their investments to be profitable is already quite a difficult task...',
+      link: 'impactInvestingAndStockReturns.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought8.png',
+      title: 'Impact Investing: Evolution of Environmental, Social and Governance scores',
+      date: 'March 15th, 2024',
+      description: 'How do you evaluate the investability of a company? In the 20th century, most investors were speculative...',
+      link: 'impactInvestingAndESG.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought19.png',
+      title: 'Inflation: Effect of Inflation on Sustainability movement',
+      date: 'February 16th, 2024',
+      description: 'In today’s Founder’s Thought, we will take a unique angle when exploring the effects of inflation...',
+      link: 'inflationAndSustainability.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought18.png',
+      title: 'Inflation: Effect of Inflation on global economy',
+      date: 'February 2nd, 2024',
+      description: 'Exploring the effects of inflation on the global economy is incredibly thought-provoking...',
+      link: 'inflationAndGlobalEconomy.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought17.png',
+      title: 'Inflation: Effect of Inflation on Small Businesses',
+      date: 'January 19th, 2024',
+      description: 'By definition, inflation brings a rise in costs to a small business...',
+      link: 'inflationAndSmallBusinesses.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought16.png',
+      title: 'Inflation: Effect of Inflation on Poverty',
+      date: 'January 5th, 2024',
+      description: 'Most lower-income households live paycheck-to-paycheck, meaning that...',
+      link: 'inflationAndPoverty.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought15.png',
+      title: 'Inflation: Effect of Inflation on Interest Rates',
+      date: 'December 22nd, 2023',
+      description: 'With the recent geopolitical conflict and unprecedented amount of federal spending...',
+      link: 'inflationAndInterestRates.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought14.png',
+      title: 'Geopolitics on Finance: Impact of Petrodollar on Financial Markets',
+      date: 'December 8th, 2023',
+      description: 'The United States is the most powerful country in the world, and a key reason is...',
+      link: 'impactOfPetrodollarOnMarkets.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought13.png',
+      title: 'Geopolitics on Finance: Impact of BRICS on Financial Markets',
+      date: 'November 24th, 2023',
+      description: 'The BRICS countries represent a significant portion of the worlds population and landmass...',
+      link: 'impactOfBRICSOnFinance.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought12.png',
+      title: 'Geopolitics on Finance: Impact of upcoming US election on Financial Markets',
+      date: 'November 10th, 2023',
+      description: 'Every four years, the United States holds its presidential election, earning attention worldwide...',
+      link: 'impactOfUSElectionsOnFinance.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought11.png',
+      title: 'Geopolitics on Finance: Impact of Israel-Hamas war on Financial Markets',
+      date: 'October 27th, 2023',
+      description: 'The world was shocked when conflict erupted in the delicate Middle East early this month...',
+      link: 'israelHamasWarOnFinance.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought10.png',
+      title: 'Geopolitics on Finance: Impact of Russia-Ukraine war on Financial Markets',
+      date: 'October 13th, 2023',
+      description: 'With the world still recovering from the COVID-19 pandemic, Russia took the world by surprise...',
+      link: 'russiaUkraineWarOnFinance.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought7.png',
+      title: 'Impact Investing: Evolution of Diversity, Equity and Inclusion',
+      date: 'September 29th, 2023',
+      description: 'A huge focus of impact investing is diversity, equity, and inclusion. These factors measure how...',
+      link: 'impactInvestingAndDEI.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought6.png',
+      title: 'Impact Investing: How impact investing has an effect on poverty?',
+      date: 'September 15th, 2023',
+      description: 'Impact Investing is the new hot buzzword in finance, but those who have been focused on sustainable finance...',
+      link: 'impactInvestingAndPoverty.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought5.png',
+      title: 'College: High paying career paths',
+      date: 'September 1st, 2023',
+      description: 'With the debate of the value of a college education financially circulating, many fail to consider...',
+      link: 'careerPaths.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought4.png',
+      title: 'College: Financial Options for sponsoring your college education',
+      date: 'August 18th, 2023',
+      description: 'For most people intending to attend college, their largest issue is financially sponsoring their education...',
+      link: 'collegeFinance.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought3.png',
+      title: 'College: Is college education worth the time and money?',
+      date: 'August 4th, 2023',
+      description: 'Recently, debate has sparked on whether or not a college education is worth...',
+      link: 'isCollegeWorthIt.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought2.png',
+      title: 'Investing Strategies for Teens and Young Adults: Retirement',
+      date: 'July 21st, 2023',
+      description: 'Retirement is a stage of life that most people look forward to...',
+      link: 'invStratRetirement.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought1.png',
+      title: 'Investing Strategies for Teens and Young Adults: College',
+      date: 'July 7th, 2023',
+      description: 'Today, paying for a college education is no longer a walk in the park...',
+      link: 'invStratCollege.html'
+    }
+];
+
+    // Function to load blog content into the homepage carousel
+  function loadBlogsToCarousel() {
     // Get the Swiper wrapper
-    const swiperWrapper = document.querySelector('.swiper-wrapper');
+    const swiperWrapper = document.querySelector('#blog-carousel  .swiper-wrapper');
 
     // Loop through blogs and create slides
     blogs.forEach(blog => {
@@ -836,7 +871,7 @@ color: gold;
     });
 
     // Initialize Swiper with autoplay and navigation
-    const swiper = new Swiper('.swiper', {
+    new Swiper('#blog-carousel.swiper', {
       loop: true,
       autoplay: {
         delay: 3000,
@@ -865,232 +900,65 @@ color: gold;
       },
     });
   }
+  
+  function loadFoundersToCarousel() {
+    const foundersWrapper = document.querySelector('#founders-carousel .swiper-wrapper');
 
-  // Call the function once the DOM content is loaded
-  window.addEventListener('DOMContentLoaded', loadBlogsToCarousel);
-
-    // Function to load founder's thoughts content into another homepage carousel
-  function loadFoundersThoughtsToCarousel() {
-    // Founder's Thought content structure from your founder's thoughts page
-    const foundersThoughts = [
-      {
-        image: 'images/foundersThoughts/ai.png',
-        title: "The Effect of AI on Financial Markets",
-        date: 'February 22nd, 2025',
-        description: 'Artificial Intelligence (AI) is rapidly transforming the financial markets, revolutionizing everything from trading strategies...',
-        link: 'ai.html'
-      },
-      {
-        image: 'images/foundersThoughts/election.png',
-        title: 'The Financial Impact of the 2024 Election',
-        date: 'November 18th, 2024',
-        description: 'The 2024 U.S. presidential election, which saw Donald Trump return to office...',
-        link: 'election.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought9.png',
-        title: 'Impact Investing: Achieving Both Financial Returns and Social Impact',
-        date: 'March 29th, 2024',
-        description: 'For many investors, simply making returns on their investments to be profitable is already quite a difficult task...',
-        link: 'impactInvestingAndStockReturns.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought8.png',
-        title: 'Impact Investing: Evolution of Environmental, Social and Governance scores',
-        date: 'March 15th, 2024',
-        description: 'How do you evaluate the investability of a company? In the 20th century, most investors were speculative...',
-        link: 'impactInvestingAndESG.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought19.png',
-        title: 'Inflation: Effect of Inflation on Sustainability movement',
-        date: 'February 16th, 2024',
-        description: 'In today’s Founder’s Thought, we will take a unique angle when exploring the effects of inflation...',
-        link: 'inflationAndSustainability.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought18.png',
-        title: 'Inflation: Effect of Inflation on global economy',
-        date: 'February 2nd, 2024',
-        description: 'Exploring the effects of inflation on the global economy is incredibly thought-provoking...',
-        link: 'inflationAndGlobalEconomy.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought17.png',
-        title: 'Inflation: Effect of Inflation on Small Businesses',
-        date: 'January 19th, 2024',
-        description: 'By definition, inflation brings a rise in costs to a small business...',
-        link: 'inflationAndSmallBusinesses.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought16.png',
-        title: 'Inflation: Effect of Inflation on Poverty',
-        date: 'January 5th, 2024',
-        description: 'Most lower-income households live paycheck-to-paycheck, meaning that...',
-        link: 'inflationAndPoverty.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought15.png',
-        title: 'Inflation: Effect of Inflation on Interest Rates',
-        date: 'December 22nd, 2023',
-        description: 'With the recent geopolitical conflict and unprecedented amount of federal spending...',
-        link: 'inflationAndInterestRates.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought14.png',
-        title: 'Geopolitics on Finance: Impact of Petrodollar on Financial Markets',
-        date: 'December 8th, 2023',
-        description: 'The United States is the most powerful country in the world, and a key reason is...',
-        link: 'impactOfPetrodollarOnMarkets.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought13.png',
-        title: 'Geopolitics on Finance: Impact of BRICS on Financial Markets',
-        date: 'November 24th, 2023',
-        description: 'The BRICS countries represent a significant portion of the worlds population and landmass...',
-        link: 'impactOfBRICSOnFinance.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought12.png',
-        title: 'Geopolitics on Finance: Impact of upcoming US election on Financial Markets',
-        date: 'November 10th, 2023',
-        description: 'Every four years, the United States holds its presidential election, earning attention worldwide...',
-        link: 'impactOfUSElectionsOnFinance.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought11.png',
-        title: 'Geopolitics on Finance: Impact of Israel-Hamas war on Financial Markets',
-        date: 'October 27th, 2023',
-        description: 'The world was shocked when conflict erupted in the delicate Middle East early this month...',
-        link: 'israelHamasWarOnFinance.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought10.png',
-        title: 'Geopolitics on Finance: Impact of Russia-Ukraine war on Financial Markets',
-        date: 'October 13th, 2023',
-        description: 'With the world still recovering from the COVID-19 pandemic, Russia took the world by surprise...',
-        link: 'russiaUkraineWarOnFinance.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought7.png',
-        title: 'Impact Investing: Evolution of Diversity, Equity and Inclusion',
-        date: 'September 29th, 2023',
-        description: 'A huge focus of impact investing is diversity, equity, and inclusion. These factors measure how...',
-        link: 'impactInvestingAndDEI.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought6.png',
-        title: 'Impact Investing: How impact investing has an effect on poverty?',
-        date: 'September 15th, 2023',
-        description: 'Impact Investing is the new hot buzzword in finance, but those who have been focused on sustainable finance...',
-        link: 'impactInvestingAndPoverty.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought5.png',
-        title: 'College: High paying career paths',
-        date: 'September 1st, 2023',
-        description: 'With the debate of the value of a college education financially circulating, many fail to consider...',
-        link: 'careerPaths.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought4.png',
-        title: 'College: Financial Options for sponsoring your college education',
-        date: 'August 18th, 2023',
-        description: 'For most people intending to attend college, their largest issue is financially sponsoring their education...',
-        link: 'collegeFinance.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought3.png',
-        title: 'College: Is college education worth the time and money?',
-        date: 'August 4th, 2023',
-        description: 'Recently, debate has sparked on whether or not a college education is worth...',
-        link: 'isCollegeWorthIt.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought2.png',
-        title: 'Investing Strategies for Teens and Young Adults: Retirement',
-        date: 'July 21st, 2023',
-        description: 'Retirement is a stage of life that most people look forward to...',
-        link: 'invStratRetirement.html'
-      },
-      {
-        image: 'images/foundersThoughts/founderThought1.png',
-        title: 'Investing Strategies for Teens and Young Adults: College',
-        date: 'July 7th, 2023',
-        description: 'Today, paying for a college education is no longer a walk in the park...',
-        link: 'invStratCollege.html'
-      }
-    ];
-
-    // Get the Swiper wrapper
-    const swiperWrapper = document.querySelector('.swiper-wrapper-b');
-
-    // Loop through founders thoughts and create slides
-    foundersThoughts.forEach(founder => {
-      const slideB = document.createElement('div');
-      slideB.classList.add('swiper-slide');
-
-      // Create founders thought card structure adapted from your blog page
-      slideB.innerHTML = `
-        <div class="founder-card">
+    founders.forEach(item => {
+      const slide = document.createElement('div');
+      slide.classList.add('swiper-slide');
+      slide.innerHTML = `
+        <div class="blog-card">
           <div class="image-container">
-            <img src="${founder.image}" alt="${founder.title}" class="image" />
+            <img src="${item.image}" alt="${item.title}" />
           </div>
           <div class="content">
-            <span class="tag">${founder.date}</span>
-            <h2>${founder.title}</h2>
-            <p class="description">${founder.description}</p>
-            <a href="${founder.link}" class="read-more">Read More</a>
+            <span class="tag">${item.date}</span>
+            <h2>${item.title}</h2>
+            <p class="description">${item.description}</p>
+            <a href="${item.link}" class="read-more">Read More</a>
           </div>
         </div>
       `;
-
-      // Append the slide to Swiper wrapper
-      swiperWrapper.appendChild(slideB);
+      foundersWrapper.appendChild(slide);
     });
 
-    // Initialize Swiper with autoplay and navigation
-    const swiperB = new Swiper('.swiper-b', {
+    new Swiper('#founders-carousel.swiper', {
       loop: true,
       autoplay: {
-        delay: 3000,
+        delay: 4000,
         disableOnInteraction: false,
       },
       pagination: {
-        el: '.swiper-pagination-b',
+        el: '#founders-carousel .swiper-pagination',
         clickable: true,
       },
       navigation: {
-        nextEl: '.swiper-button-next-b',
-        prevEl: '.swiper-button-prev-b',
+        nextEl: '#founders-carousel .swiper-button-next',
+        prevEl: '#founders-carousel .swiper-button-prev',
       },
-      spaceBetween: 20,  // Space between slides
-      slidesPerView: 1,   // Number of slides visible at a time
+      spaceBetween: 20,
+      slidesPerView: 1,
       breakpoints: {
-        640: {
-          slidesPerView: 1,
-        },
-        768: {
-          slidesPerView: 2,
-        },
-        1024: {
-          slidesPerView: 3,
-        },
+        640: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
       },
     });
   }
 
-  // Call the function once the DOM content is loaded
-  window.addEventListener('DOMContentLoaded', loadFoundersThoughtsToCarousel);
+  // Call both loaders after DOM is ready
+  window.addEventListener('DOMContentLoaded', () => {
+    loadBlogsToCarousel();
+    loadFoundersToCarousel();
+  });
+  
 </script>
 
 
   </body>
   
 
-
-
-  
 
 </html>
 
