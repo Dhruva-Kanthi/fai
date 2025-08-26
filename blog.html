@@ -266,7 +266,8 @@ color: gold;
   </head>
   <body>
     <header
-      class="bg-[#ffd35e] sm:flex sm:justify-between rounded-2xl mx-2 mt-4 bg-opacity-75 backdrop-blur-lg fixed top-0 right-0 left-0 z-50"
+      id="mainHeader"
+      class="bg-[#ffd35e] sm:flex sm:justify-between rounded-2xl mx-2 mt-4 bg-opacity-75 backdrop-blur-lg sticky top-0 right-0 left-0 z-50 transition-transform duration-300"
     >
       <div class="flex items-center justify-between px-4 py-3">
         <div>
@@ -557,10 +558,37 @@ color: gold;
           </div>
       </section>
       
-  
-  
-  
-  
+      <script>
+        // Sticky Navigation Bar Behavior
+        let lastScrollTop = 0;
+        let isSticky = false;
+        
+        window.addEventListener('scroll', () => {
+          const header = document.getElementById('mainHeader');
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          
+          if (scrollTop > 0 && !isSticky) {
+            // When scrolling down and header reaches top, make it sticky
+            header.style.position = 'fixed';
+            header.style.top = '0';
+            header.style.left = '0';
+            header.style.right = '0';
+            header.style.marginTop = '0';
+            isSticky = true;
+          } else if (scrollTop === 0 && isSticky) {
+            // When scrolling back to top, release the sticky behavior
+            header.style.position = 'sticky';
+            header.style.top = '0';
+            header.style.left = 'auto';
+            header.style.right = 'auto';
+            header.style.marginTop = '1rem';
+            isSticky = false;
+          }
+          
+          lastScrollTop = scrollTop;
+        });
+      </script>
+      
 </body>
 
 <footer style="background-color: rgba(41, 37, 37, 0.48); padding: 100px;">
