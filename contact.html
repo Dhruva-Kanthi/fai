@@ -8,6 +8,7 @@
     <link href="./dist/output.css" rel="stylesheet" />
     <link href="index.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Questrial&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css"
       rel="stylesheet"
@@ -120,9 +121,147 @@ transition: transform 0.3s ease-in-out;
 transform: scale(1.1);
 color: gold;
 }
+
+      /* Top Header Bar Styles */
+      .top-header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 100;
+          background: linear-gradient(to right, #f7d354, #f0c13d);
+          padding: 10px 0;
+          font-family: 'Poppins', sans-serif;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .top-header-content {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+      }
+
+      .top-header-left .fai-logo {
+          font-weight: 700;
+          font-size: 1.4em;
+          color: #FFD700;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+          letter-spacing: 1px;
+      }
+
+      .top-header-center {
+          text-align: center;
+          flex: 1;
+      }
+
+      .top-header-center .main-title {
+          font-weight: 600;
+          font-size: 1.1em;
+          color: #FFFFFF;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+          margin-bottom: 2px;
+      }
+
+      .top-header-center .subtitle {
+          font-style: italic;
+          font-size: 0.9em;
+          color: #90EE90;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .top-header-right {
+          width: 80px; /* Balance the left side */
+          text-align: right;
+      }
+
+      .top-header-right .subtitle {
+          font-style: italic;
+          font-size: 0.9em;
+          color: #90EE90;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+          white-space: nowrap;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+          .top-header-content {
+              flex-direction: column;
+              gap: 8px;
+              padding: 0 15px;
+          }
+
+          .top-header-left .fai-logo {
+              font-size: 1.2em;
+          }
+
+          .top-header-center .main-title {
+              font-size: 1em;
+          }
+
+          .top-header-right {
+              display: flex;
+              justify-content: center;
+              width: auto;
+          }
+
+          .top-header-right .subtitle {
+              font-size: 0.8em;
+              text-align: center;
+          }
+      }
+
+      @media (max-width: 480px) {
+          .top-header {
+              padding: 8px 0;
+          }
+
+          .top-header-left .fai-logo {
+              font-size: 1.1em;
+          }
+
+          .top-header-center .main-title {
+              font-size: 0.9em;
+          }
+
+          .top-header-right .subtitle {
+              font-size: 0.75em;
+          }
+      }
+
+      /* Adjust body margin to account for fixed top header */
+      body {
+          margin-top: 120px; /* Height of top header + sticky navbar + spacing */
+      }
+
+      /* Adjust existing sticky navbar positioning */
+      #mainHeader {
+          margin-top: 0 !important;
+      }
+
+      #mainHeader.sticky {
+          top: 60px !important; /* Position below top header */
+      }
   </style>
   </head>
   <body>
+    <!-- Slim Top Header Bar -->
+    <div class="top-header">
+      <div class="top-header-content">
+        <div class="top-header-left">
+          <span class="fai-logo">FAI</span>
+        </div>
+        <div class="top-header-center">
+          <div class="main-title">Finance and Investments Club</div>
+        </div>
+        <div class="top-header-right">
+          <div class="subtitle">Invest in Your Future</div>
+        </div>
+      </div>
+    </div>
+
     <header
       id="mainHeader"
       class="bg-[#ffd35e] sm:flex sm:justify-between rounded-2xl mx-2 mt-4 bg-opacity-75 backdrop-blur-lg sticky top-0 right-0 left-0 z-50 transition-transform duration-300"
@@ -222,21 +361,25 @@ color: gold;
         const header = document.getElementById('mainHeader');
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        if (scrollTop > 0 && !isSticky) {
-          // When scrolling down and header reaches top, make it sticky
+        if (scrollTop > 60 && !isSticky) {
+          // When scrolling down and header reaches below top header, make it sticky
           header.style.position = 'fixed';
-          header.style.top = '0';
+          header.style.top = '60px'; // Position below top header
           header.style.left = '0';
           header.style.right = '0';
           header.style.marginTop = '0';
+          header.style.zIndex = '99'; // Below top header (z-index: 100)
+          header.classList.add('sticky');
           isSticky = true;
-        } else if (scrollTop === 0 && isSticky) {
+        } else if (scrollTop <= 60 && isSticky) {
           // When scrolling back to top, release the sticky behavior
           header.style.position = 'sticky';
           header.style.top = '0';
           header.style.left = 'auto';
           header.style.right = 'auto';
           header.style.marginTop = '1rem';
+          header.style.zIndex = '50';
+          header.classList.remove('sticky');
           isSticky = false;
         }
         
