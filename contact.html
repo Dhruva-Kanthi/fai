@@ -16,12 +16,71 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+      // Two-Tier Header System Behavior
+      let lastScrollTop = 0;
+      let isCompact = false;
+      
+      window.addEventListener('scroll', () => {
+        const topHeader = document.getElementById('top-header');
+        const mainNavbar = document.getElementById('main-navbar');
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Compact mode on scroll > 80px
+        if (scrollTop > 80 && !isCompact) {
+          topHeader.classList.add('compact');
+          mainNavbar.classList.add('compact');
+          isCompact = true;
+        } else if (scrollTop <= 80 && isCompact) {
+          topHeader.classList.remove('compact');
+          mainNavbar.classList.remove('compact');
+          isCompact = false;
+        }
+        
+        lastScrollTop = scrollTop;
+      });
+
+      // Mobile menu functionality
       function openMenu() {
         var elem = document.getElementById("fainavlinks");
-        elem.classList.toggle("hidden");
         var menu = document.getElementById("fainavlinks-donate");
-        menu.classList.toggle("hidden");
+        
+        if (elem.style.display === "flex") {
+          elem.style.display = "none";
+          menu.style.display = "none";
+        } else {
+          elem.style.display = "flex";
+          menu.style.display = "flex";
+        }
       }
+
+      // Initialize mobile menu display
+      document.addEventListener('DOMContentLoaded', function() {
+        const navbarLinks = document.getElementById("fainavlinks");
+        const navbarDonate = document.getElementById("fainavlinks-donate");
+        
+        // Set initial display for mobile
+        if (window.innerWidth <= 767) {
+          navbarLinks.style.display = "none";
+          navbarDonate.style.display = "none";
+        } else {
+          navbarLinks.style.display = "flex";
+          navbarDonate.style.display = "flex";
+        }
+      });
+
+      // Handle window resize
+      window.addEventListener('resize', function() {
+        const navbarLinks = document.getElementById("fainavlinks");
+        const navbarDonate = document.getElementById("fainavlinks-donate");
+        
+        if (window.innerWidth <= 767) {
+          navbarLinks.style.display = "none";
+          navbarDonate.style.display = "none";
+        } else {
+          navbarLinks.style.display = "flex";
+          navbarDonate.style.display = "flex";
+        }
+      });
     </script>
     <style>
       body, html {
@@ -122,156 +181,355 @@ transform: scale(1.1);
 color: gold;
 }
 
-      /* Top Header Bar Styles */
+      /* Two-Tier Header System Styles */
+      
+      /* Top Header Bar */
       .top-header {
           position: fixed;
           top: 0;
           left: 0;
           right: 0;
-          z-index: 100;
-          background: linear-gradient(to right, #f7d354, #f0c13d);
-          padding: 10px 0;
-          font-family: 'Poppins', sans-serif;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          z-index: 1000;
+          background: linear-gradient(to right, #F7D354, #F0C13D);
+          height: 64px;
+          font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          box-shadow: rgba(0, 0, 0, 0.08) 0 2px 12px;
+          box-sizing: border-box;
+          padding: 12px 0;
+          user-select: none;
       }
 
       .top-header-content {
-          display: flex;
-          justify-content: space-between;
+          display: grid;
+          grid-template-columns: 1fr auto 1fr;
           align-items: center;
           max-width: 1200px;
           margin: 0 auto;
-          padding: 0 20px;
+          padding: 0 24px;
+          height: 100%;
       }
 
-      .top-header-left .fai-logo {
+      .header-left .fai-logo {
           font-weight: 700;
-          font-size: 1.4em;
-          color: #FFD700;
-          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-          letter-spacing: 1px;
+          font-size: 20px;
+          color: #1A1A40;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
       }
 
-      .top-header-center {
+      .header-center {
           text-align: center;
-          flex: 1;
+          justify-self: center;
       }
 
-      .top-header-center .main-title {
+      .header-center .main-title {
           font-weight: 600;
-          font-size: 1.1em;
+          font-size: 24px;
           color: #FFFFFF;
-          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
           margin-bottom: 2px;
+          line-height: 1.2;
       }
 
-      .top-header-center .subtitle {
+      .header-center .subtitle {
           font-style: italic;
-          font-size: 0.9em;
+          font-size: 16px;
           color: #90EE90;
-          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+          line-height: 1.2;
       }
 
-      .top-header-right {
-          width: 80px; /* Balance the left side */
+      .header-right .tagline {
+          font-style: italic;
+          font-size: 18px;
+          color: #1A1A40;
           text-align: right;
+          justify-self: end;
       }
 
-      .top-header-right .subtitle {
-          font-style: italic;
-          font-size: 0.9em;
-          color: #90EE90;
-          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-          white-space: nowrap;
+      /* Main Navigation Bar */
+      .main-navbar {
+          position: fixed;
+          top: 64px;
+          left: 0;
+          right: 0;
+          z-index: 999;
+          background: #ffd35e;
+          height: 80px;
+          box-sizing: border-box;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 24px;
+      }
+
+      .navbar-content {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+      }
+
+      .navbar-left .navbar-logo {
+          height: 48px;
+          width: auto;
+      }
+
+      .navbar-mobile-toggle {
+          display: none;
+      }
+
+      .navbar-links {
+          display: flex;
+          align-items: center;
+          gap: 32px;
+      }
+
+      .navbar-donate {
+          display: flex;
+          align-items: center;
+      }
+
+      .nav-link {
+          color: #1A1A40;
+          font-weight: 500;
+          font-size: 16px;
+          text-decoration: none;
+          letter-spacing: 0.2px;
+          padding: 8px 16px;
+          border-radius: 6px;
+          transition: all 0.2s ease;
+          position: relative;
+      }
+
+      .nav-link:hover,
+      .nav-link:focus {
+          color: #FFD700;
+          text-decoration: underline;
+          text-decoration-color: #FFD700;
+          text-decoration-thickness: 2px;
+      }
+
+      .nav-link.active {
+          background: rgba(255, 215, 0, 0.12);
+          color: #FFD700;
+          font-weight: 600;
+      }
+
+      .donate-link {
+          background: rgba(255, 215, 0, 0.1);
+          border: 1px solid rgba(255, 215, 0, 0.3);
+          color: #FFD700;
+      }
+
+      .donate-link:hover {
+          background: rgba(255, 215, 0, 0.2);
+          border-color: rgba(255, 215, 0, 0.5);
       }
 
       /* Responsive Design */
-      @media (max-width: 768px) {
+      @media (max-width: 1199px) {
+          .top-header {
+              height: 60px;
+              padding: 10px 0;
+          }
+
+          .main-navbar {
+              top: 60px;
+              height: 72px;
+              padding: 0 20px;
+          }
+
+          .header-left .fai-logo {
+              font-size: 18px;
+          }
+
+          .header-center .main-title {
+              font-size: 22px;
+          }
+
+          .header-center .subtitle {
+              font-size: 15px;
+          }
+
+          .header-right .tagline {
+              font-size: 16px;
+          }
+
           .top-header-content {
-              flex-direction: column;
-              gap: 8px;
-              padding: 0 15px;
+              padding: 0 20px;
           }
 
-          .top-header-left .fai-logo {
-              font-size: 1.2em;
-          }
-
-          .top-header-center .main-title {
-              font-size: 1em;
-          }
-
-          .top-header-right {
-              display: flex;
-              justify-content: center;
-              width: auto;
-          }
-
-          .top-header-right .subtitle {
-              font-size: 0.8em;
-              text-align: center;
+          .navbar-links {
+              gap: 24px;
           }
       }
 
-      @media (max-width: 480px) {
+      @media (max-width: 767px) {
           .top-header {
+              height: 56px;
               padding: 8px 0;
           }
 
-          .top-header-left .fai-logo {
-              font-size: 1.1em;
+          .main-navbar {
+              top: 56px;
+              height: 64px;
+              padding: 0 16px;
           }
 
-          .top-header-center .main-title {
-              font-size: 0.9em;
+          .top-header-content {
+              grid-template-columns: 1fr;
+              grid-template-rows: auto auto;
+              gap: 8px;
+              padding: 0 16px;
           }
 
-          .top-header-right .subtitle {
-              font-size: 0.75em;
+          .header-left {
+              justify-self: center;
+              grid-row: 1;
+          }
+
+          .header-center {
+              grid-row: 2;
+              justify-self: center;
+          }
+
+          .header-right {
+              display: none;
+          }
+
+          .header-left .fai-logo {
+              font-size: 16px;
+          }
+
+          .header-center .main-title {
+              font-size: 20px;
+          }
+
+          .header-center .subtitle {
+              font-size: 14px;
+          }
+
+          .navbar-content {
+              gap: 16px;
+          }
+
+          .navbar-links {
+              display: none;
+          }
+
+          .navbar-donate {
+              display: none;
+          }
+
+          .navbar-mobile-toggle {
+              display: block;
+          }
+
+          .mobile-menu-btn {
+              background: none;
+              border: none;
+              color: #1A1A40;
+              cursor: pointer;
+              padding: 8px;
+              border-radius: 4px;
+              transition: background-color 0.2s ease;
+          }
+
+          .mobile-menu-btn:hover {
+              background: rgba(255, 215, 0, 0.2);
           }
       }
 
-      /* Adjust body margin to account for fixed top header */
+      @media (max-width: 479px) {
+          .top-header {
+              height: 48px;
+              padding: 6px 0;
+          }
+
+          .main-navbar {
+              top: 48px;
+              height: 56px;
+              padding: 0 12px;
+          }
+
+          .header-left .fai-logo {
+              font-size: 14px;
+          }
+
+          .header-center .main-title {
+              font-size: 18px;
+          }
+
+          .header-center .subtitle {
+              font-size: 12px;
+          }
+
+          .top-header-content {
+              padding: 0 12px;
+          }
+      }
+
+      /* Compact mode on scroll */
+      .top-header.compact {
+          height: 56px;
+          padding: 8px 0;
+          transition: all 180ms ease;
+      }
+
+      .main-navbar.compact {
+          top: 56px;
+          height: 72px;
+          transition: all 180ms ease;
+      }
+
+      /* Body offset for fixed headers */
       body {
-          margin-top: 120px; /* Height of top header + sticky navbar + spacing */
+          margin-top: 144px; /* 64px top header + 80px main navbar */
+          font-family: 'Questrial', sans-serif;
       }
 
-      /* Adjust existing sticky navbar positioning */
-      #mainHeader {
-          margin-top: 0 !important;
-      }
-
-      #mainHeader.sticky {
-          top: 60px !important; /* Position below top header */
+      /* iOS Safe Area Support */
+      @supports (padding: max(0px)) {
+          .top-header {
+              padding-top: max(12px, env(safe-area-inset-top));
+              padding-bottom: 12px;
+          }
+          
+          .main-navbar {
+              padding-top: max(0px, env(safe-area-inset-top));
+              padding-bottom: max(0px, env(safe-area-inset-bottom));
+          }
       }
   </style>
   </head>
   <body>
-    <!-- Slim Top Header Bar -->
-    <div class="top-header">
+    <!-- Top Header Bar (New) -->
+    <div id="top-header" class="top-header" aria-label="Top site banner">
       <div class="top-header-content">
-        <div class="top-header-left">
+        <div class="header-left">
           <span class="fai-logo">FAI</span>
         </div>
-        <div class="top-header-center">
+        <div class="header-center">
           <div class="main-title">Finance and Investments Club</div>
-        </div>
-        <div class="top-header-right">
           <div class="subtitle">Invest in Your Future</div>
+        </div>
+        <div class="header-right">
+          <div class="tagline">Invest in Your Future</div>
         </div>
       </div>
     </div>
 
+    <!-- Main Navigation Bar (Refactored) -->
     <header
-      id="mainHeader"
-      class="bg-[#ffd35e] sm:flex sm:justify-between rounded-2xl mx-2 mt-4 bg-opacity-75 backdrop-blur-lg sticky top-0 right-0 left-0 z-50 transition-transform duration-300"
+      id="main-navbar"
+      class="main-navbar"
+      aria-label="Main navigation"
     >
-      <div class="flex items-center justify-between px-4 py-3">
-        <div>
-          <img src="images/failogo.png" alt="FAI" class="h-12" />
+      <div class="navbar-content">
+        <div class="navbar-left">
+          <img src="images/failogo.png" alt="FAI" class="navbar-logo" />
         </div>
-        <div class="sm:hidden">
-          <button onclick="openMenu()" class="text-white sm:hidden">
+        <div class="navbar-mobile-toggle">
+          <button onclick="openMenu()" class="mobile-menu-btn" aria-label="Toggle mobile menu">
             <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
               <path
                 fill-rule="evenodd"
@@ -281,52 +539,52 @@ color: gold;
           </button>
         </div>
       </div>
-      <div id="fainavlinks" class="hidden px-5 pt-2 sm:pb-4 sm:flex">
+      <div id="fainavlinks" class="navbar-links">
         <a
           href="index.html"
-          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          class="nav-link"
           >Home</a
         >
         <a
           href="about.html"
-          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          class="nav-link"
           >About Us</a
         >
         <a
           href="chapters.html"
-          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          class="nav-link"
           >Chapters</a
         >
         <a
           href="guest-lectures.html"
-          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          class="nav-link"
           >Guest Lectures</a
         >
         <a
           href="blog.html"
-          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          class="nav-link"
           >Blog</a
         >
         <a
           href="team.html"
-          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          class="nav-link"
           >Our Team</a
         >
         <a
           href="foundersThoughts.html"
-          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          class="nav-link"
           >Founder's Thoughts</a>
         <a
           href="contact.html"
-          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          class="nav-link active"
           >Contact</a
         >
       </div>
-      <div id="fainavlinks-donate" class="hidden px-5 sm:pt-2 pb-4 sm:flex">
+      <div id="fainavlinks-donate" class="navbar-donate">
         <a
           target="_blank"
           href="https://linktr.ee/FAIorg"
-          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          class="nav-link donate-link"
           >Join Us</a
         >
       </div>
@@ -351,41 +609,6 @@ color: gold;
             </div>
         </div>
     </div>
-
-    <script>
-      // Sticky Navigation Bar Behavior
-      let lastScrollTop = 0;
-      let isSticky = false;
-      
-      window.addEventListener('scroll', () => {
-        const header = document.getElementById('mainHeader');
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > 60 && !isSticky) {
-          // When scrolling down and header reaches below top header, make it sticky
-          header.style.position = 'fixed';
-          header.style.top = '60px'; // Position below top header
-          header.style.left = '0';
-          header.style.right = '0';
-          header.style.marginTop = '0';
-          header.style.zIndex = '99'; // Below top header (z-index: 100)
-          header.classList.add('sticky');
-          isSticky = true;
-        } else if (scrollTop <= 60 && isSticky) {
-          // When scrolling back to top, release the sticky behavior
-          header.style.position = 'sticky';
-          header.style.top = '0';
-          header.style.left = 'auto';
-          header.style.right = 'auto';
-          header.style.marginTop = '1rem';
-          header.style.zIndex = '50';
-          header.classList.remove('sticky');
-          isSticky = false;
-        }
-        
-        lastScrollTop = scrollTop;
-      });
-    </script>
 
     <footer style="background-color: rgba(41, 37, 37, 0.48); padding: 100px;">
       <div style="display: flex; justify-content: space-between; margin: 0 auto; max-width: 1200px;">
