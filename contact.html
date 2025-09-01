@@ -33,10 +33,10 @@
           if (brandBand && mainNavbar) {
               headerHeights.brand = brandBand.offsetHeight;
               headerHeights.main = mainNavbar.offsetHeight;
-              headerHeights.total = headerHeights.brand + headerHeights.main; // +16 for gap
+              headerHeights.total = headerHeights.brand + headerHeights.main + 16; // +16 for gap
               
               // Set initial body padding
-              document.body.style.marginTop = headerHeights.main + 'px';
+              document.body.style.marginTop = headerHeights.total + 'px';
           }
       }
       
@@ -217,13 +217,13 @@ color: gold;
           left: 0;
           right: 0;
           z-index: 1001;
-          background: #cbaa52;
+          background: #ffd35e;
           height: 64px;
           font-family: 'Questrial', sans-serif;
           border-bottom: 1px solid rgba(0, 0, 0, 0.1);
           transition: all 200ms ease;
-          margin: 0;
-          border-radius: 0;
+          margin: 16px 8px 0 8px;
+          border-radius: 16px;
           max-width: calc(100% - 16px);
       }
 
@@ -278,7 +278,7 @@ color: gold;
       }
 
       .bb-right {
-          font-style: normal;
+          font-style: italic;
           font-size: 18px;
           color: #000;
       }
@@ -292,20 +292,20 @@ color: gold;
       /* Tier 3: Main Menu */
       .main-navbar {
           position: fixed;
-          top: 64px;
+          top: 96px;
           left: 0;
           right: 0;
           z-index: 1000;
-          background: #cbaa52;
+          background: #ffd35e;
           height: 80px;
           font-family: 'Questrial', sans-serif;
           display: flex;
           align-items: center;
-          justify-content: flex-start; 
+          justify-content: space-between;
           padding: 0 24px;
           transition: all 200ms ease;
           margin: 0 8px;
-          border-radius: 0px;
+          border-radius: 16px;
           max-width: calc(100% - 16px);
       }
 
@@ -327,14 +327,13 @@ color: gold;
       .navbar-links {
           display: flex;
           align-items: center;
-          gap: 16px;
+          gap: 32px;
       }
 
       .navbar-donate {
           display: flex;
           align-items: center;
           gap: 16px;
-          margin-left: auto;
       }
 
       .nav-link {
@@ -342,8 +341,8 @@ color: gold;
           font-weight: 300;
           font-size: 16px;
           text-decoration: none;
-          letter-spacing: 0px;
-          padding: 8px 8px;
+          letter-spacing: 0.2px;
+          padding: 8px 16px;
           border-radius: 6px;
           transition: all 0.3s ease;
           position: relative;
@@ -550,17 +549,21 @@ color: gold;
 
       /* Body offset for fixed headers */
       body {
-          margin-top: 144px; /* 64px brand + 80px main + 16px gap */
+          margin-top: 160px; /* 64px brand + 80px main + 16px gap */
           font-family: 'Questrial', sans-serif;
           transition: margin-top 200ms ease;
       }
 
       body.compact {
-          margin-top: 80px; /* 80px main + 16px gap (brand band hidden) */
+          margin-top: 96px; /* 80px main + 16px gap (brand band hidden) */
       }
 
       /* iOS Safe Area Support */
       @supports (padding: max(0px)) {
+          .utility-strip {
+              padding-top: max(0px, env(safe-area-inset-top));
+          }
+          
           .brand-band {
               padding-top: max(0px, env(safe-area-inset-top));
           }
