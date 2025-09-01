@@ -153,8 +153,7 @@
   </head>
   <body>
     <header
-      id="mainHeader"
-      class="bg-[#ffd35e] sm:flex sm:justify-between rounded-2xl mx-2 mt-4 bg-opacity-75 backdrop-blur-lg sticky top-0 right-0 left-0 z-50 transition-transform duration-300"
+      class="bg-[#ffd35e] sm:flex sm:justify-between rounded-2xl mx-2 mt-4 bg-opacity-75 backdrop-blur-lg fixed top-0 right-0 left-0 z-50"
     >
       <div class="flex items-center justify-between px-4 py-3">
         <div>
@@ -229,11 +228,15 @@
         </div>
     </div>
     <div class="segment yellow">
-        <div class="content-wrapper">
-            <div class="title">History</div>
-            <img src="images/clubs/reedy-high-school.jpeg" alt="Reedy High School" style="width:220px;height:220px;object-fit:cover;border-radius:50%;margin:24px 0 24px 0;display:block;box-shadow:0 4px 16px rgba(0,0,0,0.15);border:6px solid #fff;" />
-            <div class="body-text">Founded at Reedy High School in 2022, FAI was born with the mission of helping students to better understand finance. What began as a small school organization has now grown exponentially, with members spanning across the United States and reaching three different continents. The commitment to provide quality financial education remains strong as the organization continues to expand its reach and impact.</div>
+        <div class="content-wrapper" style="height: 100%; min-height: 300px; display: flex; flex-direction: column; justify-content: center;">
+          <div class="title">History</div>
+          <div style="display: grid; grid-template-columns: minmax(260px,700px) 1fr; align-items: center; min-height: 220px; width: 100%; gap: clamp(32px, 8vw, 120px);">
+            <div class="body-text" style="max-width: 700px; min-width: 260px;">Founded at Reedy High School in 2022, FAI was born with the mission of helping students to better understand finance. What began as a small school organization has now grown exponentially, with members spanning across the United States and reaching three different continents. The commitment to provide quality financial education remains strong as the organization continues to expand its reach and impact.</div>
+            <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+              <img src="images/clubs/reedy-high-school.jpeg" alt="Reedy High School" style="aspect-ratio: 1 / 1; height: min(320px, 40vh); max-height: 320px; width: auto; max-width: 320px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 24px rgba(0,0,0,0.18); border:8px solid #fff; display: block;" />
+            </div>
           </div>
+        </div>
       </div>
       <div class="segment black second">
           <div class="content-wrapper">
@@ -253,38 +256,6 @@
               <div class="body-text">Whether you're a novice or an enthusiast in the finance and investments world, the FAI Club welcomes you to join a wide, interactive, and determined community. Start a chapter at your school by visiting the Chapters page. Also, join our national team through the link on the navigation bar.</div>
           </div>
       </div>
-    </div>
-
-    <script>
-      // Sticky Navigation Bar Behavior
-      let lastScrollTop = 0;
-      let isSticky = false;
-      
-      window.addEventListener('scroll', () => {
-        const header = document.getElementById('mainHeader');
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > 0 && !isSticky) {
-          // When scrolling down and header reaches top, make it sticky
-          header.style.position = 'fixed';
-          header.style.top = '0';
-          header.style.left = '0';
-          header.style.right = '0';
-          header.style.marginTop = '0';
-          isSticky = true;
-        } else if (scrollTop === 0 && isSticky) {
-          // When scrolling back to top, release the sticky behavior
-          header.style.position = 'sticky';
-          header.style.top = '0';
-          header.style.left = 'auto';
-          header.style.right = 'auto';
-          header.style.marginTop = '1rem';
-          isSticky = false;
-        }
-        
-        lastScrollTop = scrollTop;
-      });
-    </script>
     </body>
     <footer style="background-color: rgba(41, 37, 37, 0.48); padding: 100px;">
       <div style="display: flex; justify-content: space-between; margin: 0 auto; max-width: 1200px;">
