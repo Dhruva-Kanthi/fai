@@ -42,30 +42,35 @@
       
       // Handle scroll behavior
       window.addEventListener('scroll', () => {
-          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const current = window.pageYOffset || document.documentElement.scrollTop;
+        const DELTA = 5; // ignore tiny jitters
           
           // Compact mode on scroll > 40px
-          if (scrollTop > 40 && !isCompact) {
+          if (Math.abs(current - lastScrollTop) < DELTA) return;
+
+          if (current > lastScrollTop) {
+    // scrolling DOWN → hide top header (compact)
+            if (!isCompact) {
               document.body.classList.add('compact');
               isCompact = true;
-              
-              // Adjust body padding for compact mode
-              document.body.style.marginTop = headerHeights.main  + 'px';
-          } else if (scrollTop <= 40 && isCompact) {
+               document.body.style.marginTop = headerHeights.main + 'px'; // only menu height
+           }
+         } else {
+    // scrolling UP → show top header again
+            if (isCompact) {
               document.body.classList.remove('compact');
               isCompact = false;
-              
-              // Restore full body padding
-              document.body.style.marginTop = headerHeights.total + 'px';
+              document.body.style.marginTop = headerHeights.total + 'px'; // brand + menu
+             }
           }
-          
-          lastScrollTop = scrollTop;
-      });
+
+           lastScrollTop = current <= 0 ? 0 : current; // clamp at top
+          });
 
       // Mobile menu functionality
       function openMenu() {
-          var elem = document.getElementById("fainavlinks");
-          var menu = document.getElementById("fainavlinks-donate");
+          const elem = document.getElementById("fainavlinks");
+          const menu = document.getElementById("fainavlinks-donate");
           
           if (elem.style.display === "flex") {
               elem.style.display = "none";
