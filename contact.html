@@ -16,9 +16,9 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // Two-Header System Behavior
+      // BPA-Style 3-Tier Header System Behavior
       let lastScrollTop = 0;
-      let isTopHeaderVisible = true;
+      let isCompact = false;
       let headerHeights = {
           brand: 64,
           main: 80,
@@ -33,40 +33,39 @@
           if (brandBand && mainNavbar) {
               headerHeights.brand = brandBand.offsetHeight;
               headerHeights.main = mainNavbar.offsetHeight;
-              headerHeights.total = headerHeights.brand + headerHeights.main;
+              headerHeights.total = headerHeights.brand + headerHeights.main; // +16 for gap
               
               // Set initial body padding
               document.body.style.marginTop = headerHeights.total + 'px';
           }
       }
       
-      // Handle scroll behavior for top header
+      // Handle scroll behavior
       window.addEventListener('scroll', () => {
         const current = window.pageYOffset || document.documentElement.scrollTop;
         const DELTA = 5; // ignore tiny jitters
-        const TOP_THRESHOLD = 10; // Show top header only when very close to top
           
-          // Only process if scroll difference is significant
+          // Compact mode on scroll > 40px
           if (Math.abs(current - lastScrollTop) < DELTA) return;
 
-          // Show top header only when at the very top
-          if (current <= TOP_THRESHOLD) {
-            if (!isTopHeaderVisible) {
-              document.body.classList.remove('top-header-hidden');
-              isTopHeaderVisible = true;
-              document.body.style.marginTop = headerHeights.total + 'px';
-            }
-          } else {
-            // Hide top header when scrolling down from top
-            if (isTopHeaderVisible) {
-              document.body.classList.add('top-header-hidden');
-              isTopHeaderVisible = false;
-              document.body.style.marginTop = headerHeights.main + 'px';
-            }
+          if (current > lastScrollTop) {
+    // scrolling DOWN → hide top header (compact)
+            if (!isCompact) {
+              document.body.classList.add('compact');
+              isCompact = true;
+               document.body.style.marginTop = headerHeights.main + 'px'; // only menu height
+           }
+         } else {
+    // scrolling UP → show top header again
+            if (isCompact) {
+              document.body.classList.remove('compact');
+              isCompact = false;
+              document.body.style.marginTop = headerHeights.total + 'px'; // brand + menu
+             }
           }
 
-          lastScrollTop = current <= 0 ? 0 : current;
-      });
+           lastScrollTop = current <= 0 ? 0 : current; // clamp at top
+          });
 
       // Mobile menu functionality
       function openMenu() {
@@ -382,107 +381,35 @@ color: gold;
           color: #FFF;
       }
 
-      /* Top Header Hidden State (smooth fade-up animation) */
-      body.top-header-hidden .brand-band {
+      /* Compact State (on scroll) */
+      body.compact .brand-band {
           transform: translateY(-100%);
           opacity: 0;
           pointer-events: none;
-          transition: all 300ms ease-in-out;
       }
 
-      body.top-header-hidden .main-navbar {
+      body.compact .main-navbar {
           top: 0;
           background: #ffd35e;
           border-bottom: 1px solid rgba(0, 0, 0, 0.1);
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-          transition: all 300ms ease-in-out;
       }
 
-      body.top-header-hidden .main-navbar .nav-link {
+      body.compact .main-navbar .nav-link {
           color: #FFF;
       }
 
-      body.top-header-hidden .main-navbar .donate-link {
+      body.compact .main-navbar .donate-link {
           background: none;
           border: none;
           color: #FFF;
       }
 
-      body.top-header-hidden .main-navbar .donate-link:hover {
+      body.compact .main-navbar .donate-link:hover {
           background: none;
           color: #FFF;
       }
 
-      /* Bottom Header Bar */
-      .bottom-header {
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          z-index: 1002;
-          background: #cbaa52;
-          height: 60px;
-          font-family: 'Questrial', sans-serif;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 24px;
-          border-top: 1px solid rgba(0, 0, 0, 0.1);
-          box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .bottom-header-content {
-          display: flex;
-          align-items: center;
-          gap: 24px;
-          width: 100%;
-          max-width: 1200px;
-          margin: 0 auto;
-      }
-
-      .bottom-header-left {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-      }
-
-      .bottom-header-center {
-          flex: 1;
-          text-align: center;
-      }
-
-      .bottom-header-right {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-      }
-
-      .bottom-nav-link {
-          color: #000;
-          font-weight: 500;
-          font-size: 14px;
-          text-decoration: none;
-          padding: 6px 12px;
-          border-radius: 4px;
-          transition: all 0.3s ease;
-          font-family: 'Questrial', sans-serif;
-      }
-
-      .bottom-nav-link:hover {
-          background: rgba(0, 0, 0, 0.1);
-          transform: scale(1.05);
-      }
-
-      .bottom-logo {
-          height: 32px;
-          width: auto;
-      }
-
-      .bottom-title {
-          font-weight: 600;
-          font-size: 16px;
-          color: #000;
-      }
 
       /* Responsive Design */
       @media (max-width: 1199px) {
@@ -629,82 +556,14 @@ color: gold;
       /* Body offset for fixed headers */
       body {
           margin-top: 144px; /* 64px brand + 80px main + 16px gap */
-          margin-bottom: 60px; /* 60px bottom header */
           font-family: 'Questrial', sans-serif;
-          transition: margin-top 300ms ease-in-out;
+          transition: margin-top 200ms ease;
       }
 
-      body.top-header-hidden {
+      body.compact {
           margin-top: 80px; /* 80px main + 16px gap (brand band hidden) */
       }
 
-      /* Bottom header responsive styles */
-      @media (max-width: 1199px) {
-          .bottom-header {
-              height: 56px;
-              padding: 0 20px;
-          }
-          
-          body {
-              margin-bottom: 56px;
-          }
-      }
-
-      @media (max-width: 767px) {
-          .bottom-header {
-              height: 52px;
-              padding: 0 16px;
-          }
-          
-          .bottom-header-content {
-              gap: 16px;
-          }
-          
-          .bottom-nav-link {
-              font-size: 12px;
-              padding: 4px 8px;
-          }
-          
-          .bottom-logo {
-              height: 28px;
-          }
-          
-          .bottom-title {
-              font-size: 14px;
-          }
-          
-          body {
-              margin-bottom: 52px;
-          }
-      }
-
-      @media (max-width: 479px) {
-          .bottom-header {
-              height: 48px;
-              padding: 0 12px;
-          }
-          
-          .bottom-header-content {
-              gap: 12px;
-          }
-          
-          .bottom-nav-link {
-              font-size: 11px;
-              padding: 3px 6px;
-          }
-          
-          .bottom-logo {
-              height: 24px;
-          }
-          
-          .bottom-title {
-              font-size: 12px;
-          }
-          
-          body {
-              margin-bottom: 48px;
-          }
-      }
 
       /* iOS Safe Area Support */
       @supports (padding: max(0px)) {
@@ -829,23 +688,5 @@ color: gold;
         </div>
       </div>
     </footer>
-
-    <!-- Bottom Header Bar -->
-    <div class="bottom-header" aria-label="Bottom navigation">
-      <div class="bottom-header-content">
-        <div class="bottom-header-left">
-          <img src="images/failogo.png" alt="FAI" class="bottom-logo" />
-        </div>
-        <div class="bottom-header-center">
-          <div class="bottom-title">Finance and Investments</div>
-        </div>
-        <div class="bottom-header-right">
-          <a href="index.html" class="bottom-nav-link">Home</a>
-          <a href="about.html" class="bottom-nav-link">About</a>
-          <a href="contact.html" class="bottom-nav-link">Contact</a>
-          <a target="_blank" href="https://linktr.ee/FAIorg" class="bottom-nav-link">Join Us</a>
-        </div>
-      </div>
-    </div>
 </body>
 </html>
