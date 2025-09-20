@@ -60,8 +60,16 @@
 .text-container p {
     margin: 0.5rem 0;
     color: white;
+    
 }
 
 .text-container .highlight {
     color: #FFDE59;
+
 }
+ .logo img {
+     max-height: 50px;
+     width: auto;
+     object-fit: contain;
+ }
+
