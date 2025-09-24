@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="black">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAI</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link href="./dist/output.css" rel="stylesheet" />
+    <link href="index.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Questrial&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function openMenu() {
+          var elem = document.getElementById("fainavlinks");
+          elem.classList.toggle("hidden");
+          var menu = document.getElementById("fainavlinks-donate");
+          menu.classList.toggle("hidden");
+        }
+      </script>
+    <style>
+        header {
+          font-family: 'Questrial', sans-serif;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .small-title{
+            background-color: black;
+            width: 100%;
+            height: auto;
+            font-size: 3em;
+            color: #FFDE59;
+            margin: 0px;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            font-family: 'Questrial', sans-serif;
+            font-weight: bold;
+            padding: 1em;
+        }
+
+        .name{
+            font-size: 1.5em;
+            color: #FFDE59;
+            justify-content: center;
+            text-align: center;
+            font-family: 'Archivo Black', sans-serif;
+            font-weight: lighter;
+        }
+
+        .title{
+            font-size: 1.8em;
+            color: white;
+            justify-content: center;
+            text-align: center;
+            font-family: 'Questrial', sans-serif;
+        }
+        /*
+        .title {
+          font-family: 'Archivo Black', sans-serif;
+        }
+        body {
+            font-family: 'Questrial', sans-serif;
+        }
+            */
+
+        .section{
+            padding-left: 3em;
+            padding-right: 3em;
+            padding-top: 1em;
+            padding-bottom: 1em;
+            display: flex;
+            width: 100%;
+            height: auto;
+            background-color: black;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .person{
+            padding: 2em;
+            width: 300px;
+
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .person:hover {
+            transform: scale(1.1);
+        }
+
+        .person img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .pages{
+
+        transition: transform 0.3s ease-in-out;
+
+        }
+
+        .pages:hover{
+        transform: scale(1.1);
+        color: gold;
+        }
+        
+    </style>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-black">
+    <header
+      id="mainHeader"
+      class="bg-[#ffd35e] sm:flex sm:justify-between shrink rounded-2xl mx-2 mt-4 bg-opacity-75 backdrop-blur-lg sticky top-0 right-0 left-0 z-50 transition-transform duration-300"
+    >
+      <div class="flex items-center justify-between px-4 py-3">
+        <div class="">
+          <img src="images/failogo.png" alt="FAI" class="h-12" />
+        </div>
+        <div class="sm:hidden">
+          <button onclick="openMenu()" class="text-white sm:hidden">
+            <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+              <path
+                fill-rule="evenodd"
+                d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div id="fainavlinks" class="hidden px-5 pt-2 sm:pb-4 sm:flex">
+        <a
+          href="index.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Home</a
+        >
+        <a
+          href="about.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >About Us</a
+        >
+        <a
+          href="chapters.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Chapters</a
+        >
+        <a
+          href="guest-lectures.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Guest Lectures</a
+        >
+        <a
+          href="blog.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Blog</a
+        >
+        <a
+          href="team.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Our Team</a
+        >
+        <a
+          href="foundersThoughts.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Founder's Thoughts</a
+        >
+        <a
+          href="contact.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Contact</a
+        >
+      </div>
+      <div id="fainavlinks-donate" class="hidden px-5 sm:pt-2 pb-4 sm:flex">
+        <a
+          target="_blank"
+          href="https://linktr.ee/FAIorg"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Join Us</a
+        >
+      </div>
+    </header>
+
+
+    <!-- Executive Board Section -->
+<div class="relative">
+    <!-- Background Image Section -->
+    <div class="relative h-[75vh] bg-cover bg-center bg-no-repeat"
+         style="background-image: url('images/fai-2526-team/Our%20Team%20page%20background%20header.jpg');">
+        <!-- Header -->
+        <div class="absolute inset-0 flex items-center justify-center">
+            <p class="text-7xl font-extrabold text-[#FFDE59] px-4 py-2 rounded">
+                Our Team
+            </p>
+        </div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="relative flex flex-col items-centerz-10">
+        <!-- Executive Board Title -->
+        <div class="small-title mt-8">
+            Executive Board
+        </div>
+
+        <!-- Executive Board Members -->
+        <div class="flex flex-wrap justify-center gap-6 p-6">
+            <!-- Team Member -->
+            <a href="https://www.linkedin.com/in/ish-aggarwal-525799310" target="_blank" style="text-decoration: none;">
+                <div class="person">
+                    <img src="images/fai-2627-team/Ish Aggarwal - Chief Executive Officer.jpg" alt="">
+                    <div class="name">Ish Aggarwal</div>
+                    <div class="title">Chief Executive Officer</div>
+                </div>
+            </a>
+
+            <a href="https://www.linkedin.com/in/rohan-nigam-17a144307/" target="_blank" style="text-decoration: none;">
+                <div class="person">
+                    <img src="images/fai-2627-team/Rohan Nigam - Chief Operating Officer.jpg" alt="">
+                    <div class="name">Rohan Nigam</div>
+                    <div class="title">Chief Operating Officer</div>
+                </div>
+            </a>
+
+            <a href="https://www.linkedin.com/in/darsh-nirmal-a7526b2b8/" target="_blank" style="text-decoration: none;">
+                <div class="person">
+                    <img src="images/fai-2627-team/Darsh Nirmal - Chief Growth Officer.png" alt="">
+                    <div class="name">Darsh Nirmal</div>
+                    <div class="title">Chief Growth Officer</div>
+                </div>
+            </a>
+
+            <a href="https://www.linkedin.com/in/aarush-pothuri/" target="_blank" style="text-decoration: none;">
+                <div class="person">
+                    <img src="images/fai-2627-team/Aarush Pothuri - Chief Curriculum Officer.jpg" alt="">
+                    <div class="name">Aarush Pothuri</div>
+                    <div class="title">Chief Curriculum Officer</div>
+                </div>
+            </a>
+
+            <a href="" target="_blank" style="text-decoration: none;">
+                <div class="person">
+                    <img src="images/fai-2627-team/Dhruva Kanthi - Chief Technology Officer.jpg" alt="">
+                    <div class="name">Dhruva Kanthi</div>
+                    <div class="title">Chief Technology Officer</div>
+                </div>
+            </a>
+        
+            <!-- Add other team members here -->
+        </div>
+    </div>
+</div>
+    
+    <!-- Tech Section -->
+    <div class="small-title">
+        Technology Team
+    </div>
+    
+    <div class="section">
+        <a href="" target="_blank" style="text-decoration: none;">
+            <div class="person">
+                <img src="images/fai-2627-team/Dhruva Kanthi - Chief Technology Officer.jpg" alt="">
+                <div class="name">Dhruva Kanthi</div>
+                <div class="title">Chief Technology Officer</div>
+            </div>
+        </a>
+    
+        <a href="https://www.linkedin.com/in/vaibhavgollapalli/" target="_blank" style="text-decoration: none;">
+            <div class="person">
+                <img src="images/fai-2627-team/1Vaibhav Gollapalli - Technical Manager.jpg" alt="">
+                <div class="name">Vaibhav Gollapalli</div>
+                <div class="title">Technical Manager</div>
+            </div>
+        </a>
+    
+        <a href="https://www.linkedin.com/in/sanshrey-neelee-a799a4355/" target="_blank" style="text-decoration: none;">
+            <div class="person">
+                <img src="images/fai-2627-team/1Sanshrey Neelee - Technical Manager.jpg" alt="">
+                <div class="name">Sanshrey Neelee</div>
+                <div class="title">Technical Manager</div>
+            </div>
+        </a>
+    
+        <a href="" target="_blank" style="text-decoration: none;">
+            <div class="person">
+                <img src="images/fai-2627-team/Yash Menon - Technical Manager.jpg" alt="">
+                <div class="name">Yash Menon</div>
+                <div class="title">Technical Manager</div>
+            </div>
+        </a>
+    </div>
+    
+    <!-- Growth Team -->
+    <div class="small-title">
+        Growth Team
+    </div>
+    
+    <div class="section">
+        <a href="https://www.linkedin.com/in/darsh-nirmal-a7526b2b8/" target="_blank" style="text-decoration: none;">
+            <div class="person">
+                <img src="images/fai-2627-team/Darsh Nirmal - Chief Growth Officer.png" alt="">
+                <div class="name">Darsh Nirmal</div>
+                <div class="title">Chief Growth Officer</div>
+            </div>
+        </a>
+
+        <a href="https://www.linkedin.com/in/aarush-nigam-5843a82b2" target="_blank" style="text-decoration: none;">
+            <div class="person">
+                <img src="images/fai-2627-team/Aarush Nigam - Growth Manager.png" alt="">
+                <div class="name">Aarush Nigam</div>
+                <div class="title">Growth Manager</div>
+            </div>
+        </a>
+
+        <a href="https://www.linkedin.com/in/rayhaan-roshanali-3055042b4" target="_blank" style="text-decoration: none;">
+            <div class="person">
+                <img src="images/fai-2627-team/Rayhaan Roshanali - Growth Manager.jpg" alt="">
+                <div class="name">Rayhaan Roshanali</div>
+                <div class="title">Growth Manager</div>
+            </div>
+        </a>
+        
+        <a href="https://www.linkedin.com/in/sathvik-jampana-25ba3033b/" target="_blank" style="text-decoration: none;">
+            <div class="person">
+                <img src="images/favicon.ico" alt="">
+                <div class="name">Sathvik Jampana</div>
+                <div class="title">Growth Manager</div>
+            </div>
+        </a>
+    </div>
+    
+    <!-- Curriculum Team -->
+
+    <div class="small-title">
+        Curriculum Team
+    </div>
+
+    <div class="section">
+
+        <a href="https://www.linkedin.com/in/aarush-pothuri/" target="_blank" style="text-decoration: none;">
+            <div class="person">
+                <img src="images/fai-2627-team/Aarush Pothuri - Chief Curriculum Officer.jpg" alt="">
+                <div class="name">Aarush Pothuri</div>
+                <div class="title">Chief Curriculum Officer</div>
+            </div>
+        </a>
+        
+    <a href="https://www.linkedin.com/in/anhadskohli" target="_blank" style="text-decoration: none;">
+        <div class="person">
+            <img src="images/fai-2627-team/Anhad Kohli - Curriculum Manager.jpg" alt="">
+            <div class="name">Anhad Kohli</div>
+            <div class="title">Curriculum Manager</div>
+        </div>
+    </a>
+
+    <a href="https://www.linkedin.com/in/aryan-khurana-718796355/" target="_blank" style="text-decoration: none;">
+        <div class="person">
+            <img src="images/fai-2627-team/Aaryan Khurana - Curriculum Manager.png" alt="">
+            <div class="name">Aaryan Khurana</div>
+            <div class="title">Curriculum Manager</div>
+        </div>
+    </a>
+
+    <a href="https://www.linkedin.com" target="_blank" style="text-decoration: none;">
+        <div class="person">
+            <img src="images/fai-2627-team/Nikhil John - Curriculum Manager.jpg" alt="">
+            <div class="name">Nikhil John</div>
+            <div class="title">Curriculum Manager</div>
+        </div>
+    </a>
+
+    <a href="https://www.linkedin.com/in/sid-pinapala/" target="_blank" style="text-decoration: none;">
+        <div class="person">
+            <img src="images/fai-2627-team/Sid Pinapala - Curriculum Manager.jpg" alt="">
+            <div class="name">Sid Pinapala</div>
+            <div class="title">Curriculum Manager</div>
+        </div>
+    </a>
+    </div>
+
+
+    <script src="script.js"></script>
+    
+    <script>
+      // Sticky Navigation Bar Behavior
+      let lastScrollTop = 0;
+      let isSticky = false;
+      
+      window.addEventListener('scroll', () => {
+        const header = document.getElementById('mainHeader');
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > 0 && !isSticky) {
+          // When scrolling down and header reaches top, make it sticky
+          header.style.position = 'fixed';
+          header.style.top = '0';
+          header.style.left = '0';
+          header.style.right = '0';
+          header.style.marginTop = '0';
+          isSticky = true;
+        } else if (scrollTop === 0 && isSticky) {
+          // When scrolling back to top, release the sticky behavior
+          header.style.position = 'sticky';
+          header.style.top = '0';
+          header.style.left = 'auto';
+          header.style.right = 'auto';
+          header.style.marginTop = '1rem';
+          isSticky = false;
+        }
+        
+        lastScrollTop = scrollTop;
+      });
+    </script>
+
+    <footer style="background-color: rgba(41, 37, 37, 0.48); padding: 100px;">
+        <div style="display: flex; justify-content: space-between; margin: 0 auto; max-width: 1200px;">
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="images/favicon.ico" alt="FAI Logo" style="height: 125px; margin-bottom: 40px;"/>
+            <div style="display: flex; justify-content: center; gap: 16px;">
+              <a href="https://www.youtube.com/@FAI_Club" target="_blank">
+                <img src="images/icon-youtube.svg" alt="YouTube" style="height: 32px;" />
+              </a>
+              <a href="https://www.linkedin.com/company/fai-org/" target="_blank">
+                <img src="images/linkedin.jpg" alt="LinkedIn" style="height: 32px;" />
+              </a>
+              <a href="https://www.instagram.com/fai.club/" target="_blank">
+                <img src="images/Instagram Logo 2.png" alt="Instagram" style="height: 32px;" />
+              </a>
+            </div>
+          </div>
+      
+          <div style="text-align: right;">
+            <h2 style="font-family: 'Archivo Black', sans-serif; font-size: 2.5em; margin-bottom: 0.5em; color: #FFDE5A;">Pages</h2>
+            <div style="display: flex; gap: 64px;">
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <a href="index.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Home</a>
+                <a href="team.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Our Team</a>
+                <a href="contact.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Contact</a>
+                <a href="chapters.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Chapters</a>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <a href="guest-lectures.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Guest Lectures</a>
+                <a href="blog.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Blog</a>
+                <a href="about.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">About Us</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+</body>
+</html>
+
+

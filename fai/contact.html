@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="forest">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAI</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link href="./dist/output.css" rel="stylesheet" />
+    <link href="index.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Questrial&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // BPA-Style 3-Tier Header System Behavior
+      let lastScrollTop = 0;
+      let isCompact = false;
+      let headerHeights = {
+          brand: 64,
+          main: 80,
+          total: 144
+      };
+      
+      // Calculate header heights on load and resize
+      function calculateHeaderHeights() {
+          const brandBand = document.getElementById('brand-band');
+          const mainNavbar = document.getElementById('main-navbar');
+          
+          if (brandBand && mainNavbar) {
+              headerHeights.brand = brandBand.offsetHeight;
+              headerHeights.main = mainNavbar.offsetHeight;
+              headerHeights.total = headerHeights.brand + headerHeights.main; // +16 for gap
+              
+              // Set initial body padding
+              document.body.style.marginTop = headerHeights.total + 'px';
+          }
+      }
+      
+      // Handle scroll behavior
+      window.addEventListener('scroll', () => {
+        const current = window.pageYOffset || document.documentElement.scrollTop;
+        const DELTA = 5; // ignore tiny jitters
+          
+          // Compact mode on scroll > 40px
+          if (Math.abs(current - lastScrollTop) < DELTA) return;
+
+          if (current > lastScrollTop) {
+    // scrolling DOWN → hide top header (compact)
+            if (!isCompact) {
+              document.body.classList.add('compact');
+              isCompact = true;
+               document.body.style.marginTop = headerHeights.main + 'px'; // only menu height
+           }
+         } else {
+    // scrolling UP → show top header again
+            if (isCompact) {
+              document.body.classList.remove('compact');
+              isCompact = false;
+              document.body.style.marginTop = headerHeights.total + 'px'; // brand + menu
+             }
+          }
+
+           lastScrollTop = current <= 0 ? 0 : current; // clamp at top
+          });
+
+      // Mobile menu functionality
+      function openMenu() {
+          const elem = document.getElementById("fainavlinks");
+          const menu = document.getElementById("fainavlinks-donate");
+          
+          if (elem.style.display === "flex") {
+              elem.style.display = "none";
+              menu.style.display = "none";
+          } else {
+              elem.style.display = "flex";
+              menu.style.display = "flex";
+          }
+      }
+
+      // Initialize on page load
+      document.addEventListener('DOMContentLoaded', function() {
+          calculateHeaderHeights();
+          
+          const navbarLinks = document.getElementById("fainavlinks");
+          const navbarDonate = document.getElementById("fainavlinks-donate");
+          
+          // Set initial display for mobile
+          if (window.innerWidth <= 767) {
+              navbarLinks.style.display = "none";
+              navbarDonate.style.display = "none";
+          } else {
+              navbarLinks.style.display = "flex";
+              navbarDonate.style.display = "flex";
+          }
+      });
+
+      // Handle window resize
+      window.addEventListener('resize', function() {
+          calculateHeaderHeights();
+          
+          const navbarLinks = document.getElementById("fainavlinks");
+          const navbarDonate = document.getElementById("fainavlinks-donate");
+          
+          if (window.innerWidth <= 767) {
+              navbarLinks.style.display = "none";
+              navbarDonate.style.display = "none";
+          } else {
+              navbarLinks.style.display = "flex";
+              navbarDonate.style.display = "flex";
+          }
+      });
+    </script>
+    <style>
+      body, html {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          width: 100%;
+          overflow-x: hidden;
+          background-color: black;
+          font-family: 'Questrial', sans-serif;
+          overflow-y: scroll;
+      }
+      html {
+          overflow-y: hidden;
+          scroll-behavior: smooth;
+      }
+      .segment {
+          width: 100%;
+          display: flex;
+          align-items: flex-end;
+          padding: 3%;
+          box-sizing: border-box;
+          height: 100vh;
+          position: relative;
+      }
+      .black {
+          background-color: black;
+          color: white;
+          text-align: left;
+          justify-content: flex-start;
+          padding-top: 10%;
+          background-image: url('images/contactBG.png');
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
+          position: relative;
+          z-index: 1;
+      }
+      .black::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.75);
+          z-index: -1;
+      }
+      .title {
+          font-family: 'Archivo Black', sans-serif;
+          font-size: 2.5em;
+          margin-bottom: 1%;
+          color: #FFDE5A;
+      }
+      .body-text {
+          font-size: 1.2em;
+          max-width: 50%;
+          word-wrap: break-word;
+          color: white;
+      }
+      .content-wrapper {
+          max-width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+      }
+      .contact-icons {
+          background-color: #1d1b16;
+          border-radius: 10px;
+          padding: 1%;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          margin-top: 20px;
+          width: fit-content;
+      }
+      .contact-icons a {
+          display: flex;
+          align-items: center;
+          transition: transform 0.2s;
+      }
+      .contact-icons a:hover {
+          transform: scale(1.1);
+      }
+      .contact-icons img {
+          width: 60px;
+          height: 60px;
+          margin: 0 10px;
+      }
+      .pages{
+
+transition: transform 0.3s ease-in-out;
+
+}
+
+.pages:hover{
+transform: scale(1.1);
+color: gold;
+}
+
+      /* BPA-Style 3-Tier Header System */
+      
+      /* Tier 2: Brand Band */
+      .brand-band {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1001;
+          background: #cbaa52;
+          height: 64px;
+          font-family: 'Questrial', sans-serif;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          transition: all 200ms ease;
+          margin: 0;
+          border-radius: 0px;
+          max-width: 100%;
+      }
+
+      .bb-inner {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 24px;
+          height: 100%;
+          gap: 32px;
+      }
+
+      .bb-left {
+          display: flex;
+          align-items: center;
+      }
+
+      .fi {
+          font-weight: 800;
+          font-size: 32px;
+          letter-spacing: 0.5px;
+          line-height: 1;
+      }
+
+      .fi.f, .fi.i {
+          color: #000;
+      }
+
+      .fi.a {
+          color: #FFF;
+      }
+
+      .bb-center {
+          text-align: center;
+      }
+
+      .bb-title {
+          font-weight: 600;
+          font-size: 24px;
+          color: #000;
+          line-height: 1.2;
+          margin-bottom: 2px;
+      }
+
+      .bb-sub {
+          font-weight: 500;
+          font-size: 16px;
+          color: #000;
+          line-height: 1.2;
+      }
+
+      .bb-right {
+          font-style: italic;
+          font-size: 18px;
+          color: #000;
+      }
+
+      .separator-v {
+          width: 1px;
+          height: 40px;
+          background: #000;
+      }
+
+      /* Tier 3: Main Menu */
+      .main-navbar {
+          position: fixed;
+          top: 64px;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+          background: #cbaa52;
+          height: 80px;
+          font-family: 'Questrial', sans-serif;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 24px;
+          transition: all 200ms ease;
+          margin: 0 ;
+          border-radius:0;
+          max-width: 100% ;
+      }
+
+      .navbar-content {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+      }
+
+      .navbar-left .navbar-logo {
+          height: 48px;
+          width: auto;
+      }
+
+      .navbar-mobile-toggle {
+          display: none;
+      }
+
+      .navbar-links {
+          display: flex;
+          align-items: center;
+          gap: 32px;
+      }
+
+      .navbar-donate {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+      }
+
+      .nav-link {
+          color: #FFF;
+          font-weight: 300;
+          font-size: 16px;
+          text-decoration: none;
+          letter-spacing: 0.2px;
+          padding: 8px 16px;
+          border-radius: 6px;
+          transition: all 0.3s ease;
+          position: relative;
+          font-family: 'Questrial', sans-serif;
+      }
+
+      .nav-link:hover,
+      .nav-link:focus {
+          transform: scale(1.1);
+          color: #FFF;
+      }
+
+      .nav-link.active {
+          color: #FFF;
+          font-weight: 300;
+      }
+
+      .donate-link {
+          background: none;
+          border: none;
+          color: #FFF;
+          border-radius: 6px;
+          padding: 8px 16px;
+          font-weight: 300;
+          transition: all 0.3s ease;
+          font-family: 'Questrial', sans-serif;
+      }
+
+      .donate-link:hover {
+          transform: scale(1.1);
+          color: #FFF;
+      }
+
+      /* Compact State (on scroll) */
+      body.compact .brand-band {
+          transform: translateY(-100%);
+          opacity: 0;
+          pointer-events: none;
+      }
+
+      body.compact .main-navbar {
+          top: 0;
+          background: #ffd35e;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      }
+
+      body.compact .main-navbar .nav-link {
+          color: #FFF;
+      }
+
+      body.compact .main-navbar .donate-link {
+          background: none;
+          border: none;
+          color: #FFF;
+      }
+
+      body.compact .main-navbar .donate-link:hover {
+          background: none;
+          color: #FFF;
+      }
+
+
+      /* Responsive Design */
+      @media (max-width: 1199px) {
+          .brand-band {
+              height: 60px;
+          }
+
+          .main-navbar {
+              top: 64px;
+              height: 72px;
+              padding: 0 20px;
+          }
+
+          .bb-inner {
+              padding: 0 20px;
+              gap: 24px;
+          }
+
+          .fi {
+              font-size: 28px;
+          }
+
+          .bb-title {
+              font-size: 22px;
+          }
+
+          .bb-sub {
+              font-size: 15px;
+          }
+
+          .bb-right {
+              font-size: 16px;
+          }
+
+          .separator-v {
+              height: 36px;
+          }
+      }
+
+      @media (max-width: 767px) {
+          .brand-band {
+              height: 56px;
+          }
+
+          .main-navbar {
+              top: 56px;
+              height: 64px;
+              padding: 0 16px;
+          }
+
+          .bb-inner {
+              padding: 0 16px;
+              gap: 16px;
+          }
+
+          .fi {
+              font-size: 24px;
+          }
+
+          .bb-title {
+              font-size: 20px;
+          }
+
+          .bb-sub {
+              font-size: 14px;
+          }
+
+          .bb-right {
+              font-size: 14px;
+          }
+
+          .separator-v {
+              height: 32px;
+          }
+
+          .navbar-content {
+              gap: 16px;
+          }
+
+          .navbar-links {
+              display: none;
+          }
+
+          .navbar-donate {
+              display: none;
+          }
+
+          .navbar-mobile-toggle {
+              display: block;
+          }
+
+          .mobile-menu-btn {
+              background: none;
+              border: none;
+              color: #FFF;
+              cursor: pointer;
+              padding: 8px;
+              border-radius: 4px;
+              transition: background-color 0.2s ease;
+          }
+
+          .mobile-menu-btn:hover {
+              background: rgba(255, 255, 255, 0.1);
+          }
+      }
+
+      @media (max-width: 479px) {
+          .brand-band {
+              height: 48px;
+          }
+
+          .main-navbar {
+              top: 48px;
+              height: 56px;
+              padding: 0 12px;
+          }
+
+          .bb-inner {
+              padding: 0 12px;
+              gap: 12px;
+          }
+
+          .fi {
+              font-size: 20px;
+          }
+
+          .bb-title {
+              font-size: 18px;
+          }
+
+          .bb-sub {
+              font-size: 12px;
+          }
+
+          .bb-right {
+              font-size: 12px;
+          }
+
+          .separator-v {
+              height: 28px;
+          }
+      }
+
+      /* Body offset for fixed headers */
+      body {
+          margin-top: 144px; /* 64px brand + 80px main + 16px gap */
+          font-family: 'Questrial', sans-serif;
+          transition: margin-top 200ms ease;
+      }
+
+      body.compact {
+          margin-top: 80px; /* 80px main + 16px gap (brand band hidden) */
+      }
+
+
+      /* iOS Safe Area Support */
+      @supports (padding: max(0px)) {
+          .utility-strip {
+              padding-top: max(0px, env(safe-area-inset-top));
+          }
+          
+          .brand-band {
+              padding-top: max(0px, env(safe-area-inset-top));
+          }
+          
+          .main-navbar {
+              padding-top: max(0px, env(safe-area-inset-top));
+              padding-bottom: max(0px, env(safe-area-inset-bottom));
+          }
+      }
+  </style>
+  </head>
+  <body>
+    <!-- Tier 2: Brand Band -->
+    <div id="brand-band" class="brand-band" aria-label="FAI brand information">
+      <div class="bb-inner">
+        <div class="bb-left">
+          <span class="fi f">F</span><span class="fi a">A</span><span class="fi i">I</span>
+        </div>
+        <div class="separator-v"></div>
+        <div class="bb-center">
+          <div class="bb-title">Finance and Investments</div>
+          <div class="bb-sub">Club</div>
+        </div>
+        <div class="separator-v"></div>
+        <div class="bb-right">
+          <em>Invest in Your Future</em>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tier 3: Main Menu -->
+    <nav id="main-navbar" class="main-navbar" aria-label="Main navigation">
+      <div class="navbar-content">
+        <div class="navbar-left">
+          <img src="images/failogo.png" alt="FAI" class="navbar-logo" />
+        </div>
+        <div class="navbar-mobile-toggle">
+          <button onclick="openMenu()" class="mobile-menu-btn" aria-label="Toggle mobile menu">
+            <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+              <path
+                fill-rule="evenodd"
+                d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div id="fainavlinks" class="navbar-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="chapters.html" class="nav-link">Chapters</a>
+        <a href="guest-lectures.html" class="nav-link">Guest Lectures</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="team.html" class="nav-link">Our Team</a>
+        <a href="foundersThoughts.html" class="nav-link">Founder's Thoughts</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+      </div>
+      <div id="fainavlinks-donate" class="navbar-donate">
+        <a target="_blank" href="https://linktr.ee/FAIorg" class="nav-link donate-link">Join Us</a>
+      </div>
+    </nav>
+    <div class="segment black">
+        <div class="content-wrapper">
+            <div class="title" style="font-size: 5em">Reach Us</div>
+            <div class="body-text" style="font-size: 1.5em">We are here to assist you with any questions or concerns you may have. Feel free to reach out to us through our email or social media channels. Our team is dedicated to providing prompt and helpful responses.</div>
+            <div class="contact-icons">
+                <a href="https://www.instagram.com/fai.club/" target="_blank">
+                    <img src="images/fai_Instagram_Hollow.png" alt="Instagram">
+                </a>
+                <a href="https://www.linkedin.com/company/fai-org/" target="_blank">
+                    <img src="images/fai_LinkedIn_Hollow.png" alt="LinkedIn">
+                </a>
+                <a href="https://www.youtube.com/@FAI_Club/embed/C8kSrkz8Hz8" target="_blank">
+                    <img src="images/fai_Youtube_Hollow.png" alt="YouTube">
+                </a>
+                <a href="mailto:financeandinvestments@gmail.com">
+                    <img src="images/fai_Gmail_Hollow.png" alt="Gmail">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background-color: rgba(41, 37, 37, 0.48); padding: 100px;">
+      <div style="display: flex; justify-content: space-between; margin: 0 auto; max-width: 1200px;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <img src="images/favicon.ico" alt="FAI Logo" style="height: 125px; margin-bottom: 40px;"/>
+          <div style="display: flex; justify-content: center; gap: 16px;">
+            <a href="https://www.youtube.com/@FAI_Club" target="_blank">
+              <img src="images/icon-youtube.svg" alt="YouTube" style="height: 32px;" />
+            </a>
+            <a href="https://www.linkedin.com/company/fai-org/" target="_blank">
+              <img src="images/linkedin.jpg" alt="LinkedIn" style="height: 32px;" />
+            </a>
+            <a href="https://www.instagram.com/fai.club/" target="_blank">
+              <img src="images/Instagram Logo 2.png" alt="Instagram" style="height: 32px;" />
+            </a>
+          </div>
+        </div>
+    
+        <div style="text-align: right;">
+          <h2 style="font-family: 'Archivo Black', sans-serif; font-size: 2.5em; margin-bottom: 0.5em; color: #FFDE5A;">Pages</h2>
+          <div style="display: flex; gap: 64px;">
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <a href="index.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Home</a>
+              <a href="team.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Our Team</a>
+              <a href="contact.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Contact</a>
+              <a href="chapters.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Chapters</a>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <a href="guest-lectures.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Guest Lectures</a>
+              <a href="blog.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Blog</a>
+              <a href="about.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">About Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+</body>
+</html>

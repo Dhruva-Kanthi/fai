@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="black">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAI</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link href="./dist/output.css" rel="stylesheet" />
+    <link href="index.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Questrial&display=swap" rel="stylesheet">
+        
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+
+    <style>/* Container holding the image and the text */
+
+    /* Swiper Carousel Styling */
+.swiper {
+  width: 100%;
+  height: auto;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: stretch; /* This will stretch the content to equal heights */
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column; /* Flexbox for vertical alignment */
+  background-color: #1c1c1c;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 80vw;
+  height: 100%; /* Make sure the blog card takes full height */
+  overflow: hidden;
+}
+
+.blog-card img {
+  width: 100%;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.blog-card .content {
+  padding: 1rem;
+  flex-grow: 1; /* Ensures the content fills the available space */
+}
+
+.blog-card h2 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.5rem;
+  color: #FFDE5A;
+  margin-bottom: 10px;
+}
+
+.read-more {
+  color: #FFDE5A;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+}
+
+      header {
+          font-family: 'Questrial', sans-serif;
+      }
+    
+      #met1,#guest, #library {
+        position: relative;
+        text-align: center;
+        color: white;
+      }
+      .sponsors{
+      position: relative;
+      text-align: center;
+      color: white;
+      }
+      
+      /* Bottom right text */
+      .bottom-right {
+        position: absolute;
+        bottom: 8px;
+        right: 16px;
+        padding: 20px;
+        
+      }
+      
+      
+      .image-container{
+          width: 100%;
+          height: auto;
+          
+
+      }
+      .image-container img{
+          width: 100%;
+          height: auto;
+          object-fit: contain;
+          opacity: 0.25;
+      }
+      ul{
+          width: 100%;
+          height: auto;
+      }
+      
+      .top-left {
+      position: absolute;
+      top: 8px;
+      left: 16px;
+      }
+
+      .containero{
+          transition: transform 0.3s ease-in-out;
+
+      }
+
+      .containero:hover {
+          transform: scale(1.1);
+      }
+      .title {
+          font-family: 'Archivo Black', sans-serif;
+        }
+        body {
+            font-family: 'Questrial', sans-serif;
+        }
+        .pages{
+
+transition: transform 0.3s ease-in-out;
+
+}
+
+.pages:hover{
+transform: scale(1.1);
+color: gold;
+}
+      </style>
+
+<style> 
+
+
+
+  @keyframes fadeIn {
+      from { 
+          opacity: 0; 
+          transform: translateY(15px); 
+      }
+      to { 
+          opacity: 1; 
+          transform: translateY(0); 
+      }
+  }
+
+  @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+  }
+
+  .fade-in {
+      animation: fadeIn 800ms forwards;
+  }
+
+  .fade-out {
+      animation: fadeOut 150ms forwards;
+  }
+
+  .section-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background-color: black;
+  }
+
+  .image-container {
+      position: relative;
+      width: 66.66%;
+  }
+
+  .image-container img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      transform: skewY(-6deg);
+  }
+
+  .text-container {
+      position: absolute;
+      left: 2rem;
+      background-color: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 1rem;
+      z-index: 1;
+  }
+
+  .text-container p {
+      margin: 0.5rem 0;
+      color: white;
+  }
+
+  .text-container .highlight {
+      color: #FFDE59;
+  }
+  /* Add padding to the top of the entire carousel section */
+#blog-carousel {
+  padding-top: 40px; /* Adjust the value as needed (e.g., 40px) */
+}
+
+/* Swiper Carousel Styling */
+.swiper {
+  width: 100%;
+  height: auto;
+  padding-bottom: 50px; /* Already existing bottom padding */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #1c1c1c;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.blog-card .image-container {
+  width: 100%;
+  height: 150px; /* Fixed height for the image container */
+  overflow: hidden;
+}
+
+.blog-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blog-card .content {
+  flex-grow: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.read-more {
+  margin-top: auto;
+}
+
+</style>
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      function openMenu() {
+        var elem = document.getElementById("fainavlinks");
+        elem.classList.toggle("hidden");
+        var menu = document.getElementById("fainavlinks-donate");
+        menu.classList.toggle("hidden");
+      }
+
+      function visitDonatePage() {
+        window.open("https://gofund.me/c61e6ac1", "_blank");
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const schoolNames = [
+          "Reedy High School",
+          "Frisco High School",
+          "Lebanon Trail High School",
+          "Wakeland High School",
+          "Manchester Essex Regional High School",
+          "Pine Crest High School",
+          "North Broward Prep High School",
+          "Dr. Michael Krop Senior High School",
+          "Abraham Lincoln High School",
+          "Saratoga High School",
+          "Bellarmine College Prepatory",
+          "New Tech High @ Coppell",
+          "Hebron High School",
+          "Prosper High School",
+          "Lewisville High School - Harmon",
+          "Flower Mound HS",
+          "Francis Howell North",
+          "The Adelson School",
+          "Ed W. Clark High School",
+          "The Meadows School",
+          "Montclair High School",
+          "Pioneer Heritage Middle School",
+          "Griffin Middle School",
+          "Green Level High School",
+          "Heritage High School",
+          "Ray Braswell High School",
+          "Centennial High School",
+          "Panther Creek High School",
+          "Cypress Ranch High School",
+          "Cypress Ranch High School",
+          "North Allegheny Senior High School",
+          "North Allegheny Intermediate High School",
+          "Parsippany Hills High School",
+          "Pine-Richland High School",
+          "Roy C. Ketcham High School",
+          "Benjamin Franklin High School",
+          "Gyanodaya International School",
+          "Y. B. Patil Polytechnic",
+          "BASIS International School Guangzhou",
+          "Guangzhou Tianxin Experimental School",
+          "Beijing Academy",
+          "Shanghai Guanghua Cambridge International School",
+          "Ulink College of Shanghai",
+          "The Woodlands High School",
+          "Lone Star High School",
+          "Central High School",
+        ];
+
+        let currentIndex = 0;
+        const textElement = document.getElementById("schoolName");
+
+        function updateSchoolName() {
+          textElement.classList.remove("fade-in");
+          textElement.classList.add("fade-out");
+
+          textElement.addEventListener(
+            "animationend",
+            function () {
+              textElement.classList.remove("fade-out");
+
+              const randomIndex = Math.floor(
+                Math.random() * schoolNames.length
+              );
+
+              textElement.textContent = schoolNames[randomIndex];
+
+              textElement.classList.add("fade-in");
+            },
+            { once: true }
+          );
+        }
+
+        setInterval(updateSchoolName, 2500);
+      });
+    </script>
+  </head>
+
+
+ 
+  <body class="bg-black">
+    <header
+      id="mainHeader"
+      class="bg-[#ffd35e] sm:flex sm:justify-between shrink rounded-2xl mx-2 mt-4 bg-opacity-75 backdrop-blur-lg sticky top-0 right-0 left-0 z-50 transition-transform duration-300"
+    >
+      <div class="flex items-center justify-between px-4 py-3">
+        <div class="">
+          <img src="images/failogo.png" alt="FAI" class="h-12" />
+        </div>
+        <div class="sm:hidden">
+          <button onclick="openMenu()" class="text-white sm:hidden">
+            <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+              <path
+                fill-rule="evenodd"
+                d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div id="fainavlinks" class="hidden px-5 pt-2 sm:pb-4 sm:flex">
+        <a
+          href="index.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Home</a
+        >
+        <a
+          href="about.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >About Us</a
+        >
+        <a
+          href="chapters.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Chapters</a
+        >
+        <a
+          href="guest-lectures.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Guest Lectures</a
+        >
+        <a
+          href="blog.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Blog</a
+        >
+        <a
+          href="team.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Our Team</a
+        >
+        <a
+          href="foundersThoughts.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Founder's Thoughts</a
+        >
+        <a
+          href="contact.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Contact</a
+        >
+      </div>
+      <div id="fainavlinks-donate" class="hidden px-5 sm:pt-2 pb-4 sm:flex">
+        <a
+          target="_blank"
+          href="https://linktr.ee/FAIorg"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Join Us</a
+        >
+      </div>
+    </header>
+
+    <div class="relative h-[120vh] lg:h-[150vh] flex flex-col  items-center text-center">
+      <!-- Background Image -->
+      <div class="absolute inset-0">
+        <div class="bg-cover bg-center bg-no-repeat h-full w-full opacity-25" style="background-image: url('images/faiMeeting1.png');"></div>
+      </div>
+      
+      <!-- Main Content -->
+      <div class="relative z-10 top-[37vh]">
+        <p class="text-7xl text-[#FFDE59] font-bold mb-2 title">FAI</p>
+        <p class="text-3xl text-white">Empowering financial futures at</p>
+        <p id="schoolName" class="text-[#FFDE59] font-bold transition text-3xl mb-3 mt-1 title">Reedy High School</p>
+        <button class="bg-[#FFDE59] rounded-xl transition ease-in-out duration-300 hover:scale-105 mt-2 py-3 px-4 text-lg text-center text-black title" onclick="visitDonatePage();">
+          Donate
+        </button>
+      </div>
+      
+      <!-- About Us Section -->
+      <div class="absolute bottom-0 right-0 p-4 sm:p-16 lg:w-[43vw]">
+        <div class="text-right mt-4">
+          <h3 class="lg:text-6xl text-5xl font-extrabold text-[#FFDE59] mb-2 title">About Us</h3>
+          <p class="lg:text-2xl text-[17px] text-white mt-2 ml-20 lg:ml-0">
+            The Finance and Investments (FAI) Club looks to empower students with the knowledge and skills to navigate the corporate world. FAI has evolved into a thriving 501(c)(3) non-profit dedicated to fostering financial literacy and education among students worldwide.
+          </p>
+        </div>
+      </div>
+    </div>
+  
+  
+    <a href="https://linktr.ee/FAIorg" style="text-decoration: none;width: 100%;height: 15em;background-color: #FFDE59;z-index: 999999; " target="_blank">
+      <div style="background-color: #FFDE59; width: 100%; " class="text-center flex flex-col justify-center items-center h-full w-full transition ease-in-out duration-300 hover:scale-110 p-3">
+          <p class="text-black md:text-3xl text-xl">Become a Part of Our Story</p>
+          <p class="text-black md:text-7xl text-4xl font-extrabold pb-4 title">Join Us</p>
+      </div>
+      </a>
+  
+
+      <!-- Blog Swiper Carousel Section -->
+<section id="blog-carousel" class="swiper mySwiper">
+  <h2 style="text-align: center; color: #FFDE59; font-size: 48px; font-family: 'Archivo Black', sans-serif; padding-bottom: 20px;">Blog</h2>
+
+
+  <div class="swiper-wrapper">
+    <!-- Slides will be populated via JavaScript -->
+  </div>
+  <!-- Add optional navigation buttons -->
+  <div class="swiper-button-next" style="color: #FFDE5A;"></div>
+  <div class="swiper-button-prev " style="color: #FFDE5A;"></div>
+  <!-- Swiper pagination -->
+  <div class="swiper-pagination"></div>
+</section>
+
+
+  <!-- Available Opportunities Section -->
+<div class="relative lg:flex justify-center items-center bg-black text-white lg:pl-10 px-8 lg:px-0">
+  <!-- Text Content -->
+  <div class="relative lg:w-7/12 z-10 lg:pr-20">
+    <h3 class="lg:text-6xl text-4xl font-extrabold text-[#FFDE59] mb-4 mt-16 lg:text-left text-center title">Available Opportunities <br> For You</h3>
+    <p class="text-[18px] lg:mb-20 mb-5 lg:pr-10">
+      At FAl, resources are continuously built up to meet members' desires. Our guest lectures continue each month, sharing some industry insights and allowing a special attending member Q&A. This year, chapters will share improved curriculum, featuring additional topics and interactive sessions. In addition, FAl is introducing exciting new competitions, namely virtual business challenges, entrepreneurship pitches, in addition to the annual stock market game. The introduction of FAl's Mentor Pool will allow students to connect with seasoned business professionals, turning to them for specific 1-to-1 guidance and advice. Lastly, the Research Pipeline program will provide a one of a kind opportunity for upperclassmen to collaborate with finance/economics professors during hands-on research projects.
+    </p>
+  </div>
+
+  <!-- Image Content with Slanted Divider -->
+  <div class="relative lg:w-5/12 opacity-70 z-10 pr-0 mb-8 lg:mb-0">
+    <div class="overflow-hidden flex justify-center items-center">
+      <img src="images/avaliableopportunities.png" alt="FAI Meeting" class="lg:h-full lg:w-full h-10/12 w-10/12">
+    </div>
+  </div>
+</div>
+
+    
+    
+  
+  
+  <!-- Guest Lectures Section -->
+  <div class="py-16 px-8 bg-[#FFDE59] md:flex justify-center items-center">
+    <div class="md:w-1/2">
+      <h3 class="lg:text-6xl text-3xl font-extrabold text-black mb-4">
+        <span class="block lg:text-3xl text-xl font-normal">FAI EVENTS</span>
+        <p class="text-center lg:text-left title">Guest Lectures</p>
+      </h3>
+      <p class="text-[18px] text-black lg:pr-20 mb-5 lg:mb-0">
+        At FAl, resources are continuously built up to meet members' desires. Our guest lectures continue each month, sharing some industry insights and allowing a special attending member Q&A. This year, chapters will share improved curriculum, featuring additional topics and interactive sessions. In addition, FAl is introducing exciting new competitions, namely virtual business challenges, entrepreneurship pitches, in addition to the annual stock market game. The introduction of FAl's Mentor Pool will allow students to connect with seasoned business professionals, turning to them for specific 1-to-1 guidance and advice. Lastly, the Research Pipeline program will provide a one of a kind opportunity for upperclassmen to collaborate with finance/economics professors during hands-on research projects.
+      </p>
+    </div>
+    <div class="md:w-1/2 self-center">
+      <img src="images/faiInterview1.png">
+    </div>
+  </div>
+  
+  <!-- Founders' Thoughts Swiper Carousel Section -->
+  <section id="founders-carousel" class="swiper foundersSwiper">
+    <h2 style="text-align: center; color: #FFDE59; font-size: 48px; font-family: 'Archivo Black', sans-serif; padding-bottom: 20px;">Founders' Thoughts</h2>
+
+    <div class="swiper-wrapper">
+      <!-- Slides will be populate by JS -->
+    </div>
+
+    <div class="swiper-button-next" style="color: #FFDE5A;"></div>
+    <div class="swiper-button-prev" style="color: #FFDE5A;"></div>
+    <div class="swiper-pagination"></div>
+  </section>
+
+  <!-- Stock Market Game Section -->
+  <div class="bg-black text-white py-8 px-8 flex lg:flex-row flex-col-reverse justify-center items-center">
+    <img src="images/stockgame.png" alt="Stock Market Game" class="sm:w-1/3 p-8 mt-3 lg:mt-0 block">
+    <div class="lg:mx-12 mx-2">
+      <h3 class="lg:text-6xl text-3xl font-extrabold text-[#FFDE59] mb-4">
+        <span class="block lg:text-3xl text-xl font-normal">FAI EVENTS</span>
+        <p class="text-center lg:text-left title">Stock Market Game</p>
+      </h3>
+      <p class="text-[20px]">
+        At FAl, we take pride in our Stock Market Game competition, an exciting and educational experience designed to immerse members of the Finance and Investments Club in the world of trading and investment. This interactive simulation allows participants to manage a virtual portfolio, make real-time decisions, and experience the thrills and challenges of the stock market.
+      </p>
+    </div>
+  </div>
+  
+  <!-- Around the World Section -->
+  <div class="border-t-4 border-black pt-14 pb-6 px-8 bg-[#FFDE59] lg:flex justify-center items-center">
+    
+    <div class="lg:w-7/12">
+      <h3 class="lg:text-6xl text-3xl font-extrabold text-black mb-4">
+        <span class="block lg:text-3xl text-xl font-normal">FAI PHILANTHROPY</span>
+        <p class="text-center lg:text-left title">Around the World</p>
+      </h3>
+      <p class="text-[18px] text-black lg:pr-20">
+        As part of our philanthropic efforts, we have embarked on an ambitious project to build a library in a rural village in India. This initiative aims to provide access to educational resources and foster a culture of learning and literacy among the local community. With the collective efforts of our dedicated members and generous contributions from supporters, we have made significant progress toward this goal. Fundraising events, charity drives, and community outreach programs have helped us secure a substantial portion of the necessary funds.
+      </p>
+    </div>
+    <div class="self-center lg:w-5/12">
+      <img src="images/libraryinindia.jpg" alt="Around the World" class="w-full">
+    </div>
+    
+  </div>
+  
+  <!-- Sponsors Section -->
+  <div class="bg-black text-white py-16 text-center">
+    <p class="text-3xl mb-2 font-semibold title">Thanks To Our</p>
+    <h3 class="text-6xl font-extrabold mb-8 title">Partners</h3>
+    <div class="flex justify-center items-center lg:space-x-32 md:space-x-12 space-x-0">
+      <!-- Bluebolt -->
+      <img src="images/BLUEBOLT.png" alt="Bluebolt" class="lg:w-1/5 md:w-3/12 w-4/12 p-4">
+
+      <!-- Chipotle wrapped in link -->
+      <a href="https://www.chipotle.com" target="_blank" class="lg:w-1/5 md:w-3/12 w-4/12 p-4 flex justify-center items-center">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Chipotle_Mexican_Grill_logo.svg/800px-Chipotle_Mexican_Grill_logo.svg.png" alt="Chipotle" class="w-full h-auto">
+      </a>
+    </div>
+
+
+
+    </div>
+  </div>
+
+
+     <!-- 
+    
+    <div class="md:flex items-center justify-center px-2 sm:px-14 py-20 bg-black section-container">
+      <div class="sm:w-2/5 flex justify-center">
+        <div class="flex items-center justify-center">
+          <img src="images/faiMeeting1.png" id="faiMeeting1-image" class="md:w-11/12 h-auto rounded-xl">
+        </div>
+        <div class="sm:w-1/5"></div>
+      </div>
+      <div class="w-auto sm:w-3/5 text-container">
+        <p class="text-4xl text-white font-bold">Welcome to </p>
+        <p class="text-4xl text-[#FFDE59] font-bold">Finance and Investments Org.</p>
+        <p class="text-lg mt-4 text-gray-300">The Finance and Investments (FAI) Club looks to empower students with the knowledge and skills to navigate the corporate world. FAI has evolved into a thriving 501(c)(3) non-profit dedicated to fostering financial literacy and education among students worldwide.
+        </p>
+      </div>
+    </div>
+
+    <div class="md:flex items-center justify-center px-2 sm:px-14 py-20 bg-[#171212]">
+      <div class="sm:w-2/5 flex justify-center">
+        <div class="flex items-center justify-center">
+          <img src="images/faiMeeting2.jpg" id="faiMeeting2-image" class="md:w-11/12 h-auto rounded-xl">
+        </div>
+        <div class="sm:w-1/5"></div>
+      </div>
+      <div class="w-auto sm:w-3/5">
+        <p class="text-4xl text-white font-bold">Available Opportunities </p>
+        <p class="text-4xl text-[#FFDE59] font-bold">For You</p>
+        <p class="text-lg mt-4 text-gray-300">At FAI, resources are continuously built up to meet members’ desires. Our guest lectures continue each month, sharing some industry insights and allowing a special attending member Q&A. This year, chapters will share improved curriculum, featuring additional topics and interactive sessions. In addition, FAI is introducing exciting new competitions, namely virtual business challenges, entrepreneurship pitches, in addition to the annual stock market game. The introduction of FAI’s Mentor Pool will allow students to connect with seasoned business professionals, turning to them for specific 1-to-1 guidance and advice. Lastly, the Research Pipeline program will provide a one of a kind opportunity for upperclassmen to collaborate with finance/economics professors during hands-on research projects.
+        </p>
+      </div>
+    </div>
+    -->
+    
+    <footer style="background-color: rgba(41, 37, 37, 0.48); padding: 100px;">
+      <div style="display: flex; justify-content: space-between; margin: 0 auto; max-width: 1200px;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <img src="images/favicon.ico" alt="FAI Logo" style="height: 125px; margin-bottom: 40px;"/>
+          <div style="display: flex; justify-content: center; gap: 16px;">
+            <a href="https://www.youtube.com/@FAI_Club" target="_blank">
+              <img src="images/icon-youtube.svg" alt="YouTube" style="height: 32px;" />
+            </a>
+            <a href="https://www.linkedin.com/company/fai-org/" target="_blank">
+              <img src="images/linkedin.jpg" alt="LinkedIn" style="height: 32px;" />
+            </a>
+            <a href="https://www.instagram.com/fai.club/" target="_blank">
+              <img src="images/Instagram Logo 2.png" alt="Instagram" style="height: 32px;" />
+            </a>
+          </div>
+        </div>
+    
+        <div style="text-align: right;">
+          <h2 style="font-family: 'Archivo Black', sans-serif; font-size: 2.5em; margin-bottom: 0.5em; color: #FFDE5A;">Pages</h2>
+          <div style="display: flex; gap: 64px;">
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <a href="index.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Home</a>
+              <a href="team.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Our Team</a>
+              <a href="contact.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Contact</a>
+              <a href="chapters.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Chapters</a>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <a href="guest-lectures.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Guest Lectures</a>
+              <a href="blog.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Blog</a>
+              <a href="about.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">About Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+<script>
+  // Blog content structure from your blog page
+  const blogs = [
+    {
+      image: 'images/professionals.jpeg',
+      title: "FAI's Upcoming Guest Lectures & What to Expect",
+      date: 'March 1st, 2024',
+      description: 'FAI has teamed up with professionals in the finance field to host guest lectures...',
+      link: 'blog_plans.html'
+    },
+    {
+      image: 'images/libraryinindia.jpg',
+      title: 'Library Fundraiser in India',
+      date: 'February 9th, 2024',
+      description: 'FAI members raised donations to fund a library in India to provide access to education...',
+      link: 'blog_library.html'
+    },
+    {
+      image: 'images/sustainableinv.jpeg',
+      title: 'Sustainable Investing',
+      date: 'November 2nd, 2023',
+      description: 'FAI believes in sustainable investing to secure the environment for future generations...',
+      link: 'blog_sustainableinv.html'
+    },
+    {
+      image: 'images/fin-literacy.gif',
+      title: 'Financial Literacy for K-12',
+      date: 'August 14th, 2023',
+      description: 'The need for financial literacy programs is undeniable. 87% of teens dont understand personal finances...',
+      link: 'blog_finliteracy.html'
+    }
+  ];
+
+  const founders = [
+  {
+    image: 'images/foundersThoughts/ai.png',
+      title: "The Effect of AI on Financial Markets",
+      date: 'February 22nd, 2025',
+      description: 'Artificial Intelligence (AI) is rapidly transforming the financial markets, revolutionizing everything from trading strategies...',
+      link: 'ai.html'
+    },
+    {
+      image: 'images/foundersThoughts/election.png',
+      title: 'The Financial Impact of the 2024 Election',
+      date: 'November 18th, 2024',
+      description: 'The 2024 U.S. presidential election, which saw Donald Trump return to office...',
+      link: 'election.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought9.png',
+      title: 'Impact Investing: Achieving Both Financial Returns and Social Impact',
+      date: 'March 29th, 2024',
+      description: 'For many investors, simply making returns on their investments to be profitable is already quite a difficult task...',
+      link: 'impactInvestingAndStockReturns.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought8.png',
+      title: 'Impact Investing: Evolution of Environmental, Social and Governance scores',
+      date: 'March 15th, 2024',
+      description: 'How do you evaluate the investability of a company? In the 20th century, most investors were speculative...',
+      link: 'impactInvestingAndESG.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought19.png',
+      title: 'Inflation: Effect of Inflation on Sustainability movement',
+      date: 'February 16th, 2024',
+      description: 'In today’s Founder’s Thought, we will take a unique angle when exploring the effects of inflation...',
+      link: 'inflationAndSustainability.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought18.png',
+      title: 'Inflation: Effect of Inflation on global economy',
+      date: 'February 2nd, 2024',
+      description: 'Exploring the effects of inflation on the global economy is incredibly thought-provoking...',
+      link: 'inflationAndGlobalEconomy.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought17.png',
+      title: 'Inflation: Effect of Inflation on Small Businesses',
+      date: 'January 19th, 2024',
+      description: 'By definition, inflation brings a rise in costs to a small business...',
+      link: 'inflationAndSmallBusinesses.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought16.png',
+      title: 'Inflation: Effect of Inflation on Poverty',
+      date: 'January 5th, 2024',
+      description: 'Most lower-income households live paycheck-to-paycheck, meaning that...',
+      link: 'inflationAndPoverty.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought15.png',
+      title: 'Inflation: Effect of Inflation on Interest Rates',
+      date: 'December 22nd, 2023',
+      description: 'With the recent geopolitical conflict and unprecedented amount of federal spending...',
+      link: 'inflationAndInterestRates.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought14.png',
+      title: 'Geopolitics on Finance: Impact of Petrodollar on Financial Markets',
+      date: 'December 8th, 2023',
+      description: 'The United States is the most powerful country in the world, and a key reason is...',
+      link: 'impactOfPetrodollarOnMarkets.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought13.png',
+      title: 'Geopolitics on Finance: Impact of BRICS on Financial Markets',
+      date: 'November 24th, 2023',
+      description: 'The BRICS countries represent a significant portion of the worlds population and landmass...',
+      link: 'impactOfBRICSOnFinance.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought12.png',
+      title: 'Geopolitics on Finance: Impact of upcoming US election on Financial Markets',
+      date: 'November 10th, 2023',
+      description: 'Every four years, the United States holds its presidential election, earning attention worldwide...',
+      link: 'impactOfUSElectionsOnFinance.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought11.png',
+      title: 'Geopolitics on Finance: Impact of Israel-Hamas war on Financial Markets',
+      date: 'October 27th, 2023',
+      description: 'The world was shocked when conflict erupted in the delicate Middle East early this month...',
+      link: 'israelHamasWarOnFinance.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought10.png',
+      title: 'Geopolitics on Finance: Impact of Russia-Ukraine war on Financial Markets',
+      date: 'October 13th, 2023',
+      description: 'With the world still recovering from the COVID-19 pandemic, Russia took the world by surprise...',
+      link: 'russiaUkraineWarOnFinance.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought7.png',
+      title: 'Impact Investing: Evolution of Diversity, Equity and Inclusion',
+      date: 'September 29th, 2023',
+      description: 'A huge focus of impact investing is diversity, equity, and inclusion. These factors measure how...',
+      link: 'impactInvestingAndDEI.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought6.png',
+      title: 'Impact Investing: How impact investing has an effect on poverty?',
+      date: 'September 15th, 2023',
+      description: 'Impact Investing is the new hot buzzword in finance, but those who have been focused on sustainable finance...',
+      link: 'impactInvestingAndPoverty.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought5.png',
+      title: 'College: High paying career paths',
+      date: 'September 1st, 2023',
+      description: 'With the debate of the value of a college education financially circulating, many fail to consider...',
+      link: 'careerPaths.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought4.png',
+      title: 'College: Financial Options for sponsoring your college education',
+      date: 'August 18th, 2023',
+      description: 'For most people intending to attend college, their largest issue is financially sponsoring their education...',
+      link: 'collegeFinance.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought3.png',
+      title: 'College: Is college education worth the time and money?',
+      date: 'August 4th, 2023',
+      description: 'Recently, debate has sparked on whether or not a college education is worth...',
+      link: 'isCollegeWorthIt.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought2.png',
+      title: 'Investing Strategies for Teens and Young Adults: Retirement',
+      date: 'July 21st, 2023',
+      description: 'Retirement is a stage of life that most people look forward to...',
+      link: 'invStratRetirement.html'
+    },
+    {
+      image: 'images/foundersThoughts/founderThought1.png',
+      title: 'Investing Strategies for Teens and Young Adults: College',
+      date: 'July 7th, 2023',
+      description: 'Today, paying for a college education is no longer a walk in the park...',
+      link: 'invStratCollege.html'
+    }
+];
+
+    // Function to load blog content into the homepage carousel
+  function loadBlogsToCarousel() {
+    // Get the Swiper wrapper
+    const swiperWrapper = document.querySelector('#blog-carousel  .swiper-wrapper');
+
+    // Loop through blogs and create slides
+    blogs.forEach(blog => {
+      const slide = document.createElement('div');
+      slide.classList.add('swiper-slide');
+
+      // Create blog card structure adapted from your blog page
+      slide.innerHTML = `
+        <div class="blog-card">
+          <div class="image-container">
+            <img src="${blog.image}" alt="${blog.title}" class="image" />
+          </div>
+          <div class="content">
+            <span class="tag">${blog.date}</span>
+            <h2>${blog.title}</h2>
+            <p class="description">${blog.description}</p>
+            <a href="${blog.link}" class="read-more">Read More</a>
+          </div>
+        </div>
+      `;
+
+      // Append the slide to Swiper wrapper
+      swiperWrapper.appendChild(slide);
+    });
+
+    // Initialize Swiper with autoplay and navigation
+    new Swiper('#blog-carousel.swiper', {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      spaceBetween: 20,  // Space between slides
+      slidesPerView: 1,   // Number of slides visible at a time
+      breakpoints: {
+        640: {
+          slidesPerView: 1,
+        },
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      },
+    });
+  }
+  
+  function loadFoundersToCarousel() {
+    const foundersWrapper = document.querySelector('#founders-carousel .swiper-wrapper');
+
+    founders.forEach(item => {
+      const slide = document.createElement('div');
+      slide.classList.add('swiper-slide');
+      slide.innerHTML = `
+        <div class="blog-card">
+          <div class="image-container">
+            <img src="${item.image}" alt="${item.title}" />
+          </div>
+          <div class="content">
+            <span class="tag">${item.date}</span>
+            <h2>${item.title}</h2>
+            <p class="description">${item.description}</p>
+            <a href="${item.link}" class="read-more">Read More</a>
+          </div>
+        </div>
+      `;
+      foundersWrapper.appendChild(slide);
+    });
+
+    new Swiper('#founders-carousel.swiper', {
+      loop: true,
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '#founders-carousel .swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '#founders-carousel .swiper-button-next',
+        prevEl: '#founders-carousel .swiper-button-prev',
+      },
+      spaceBetween: 20,
+      slidesPerView: 1,
+      breakpoints: {
+        640: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+      },
+    });
+  }
+
+  // Call both loaders after DOM is ready
+  window.addEventListener('DOMContentLoaded', () => {
+    loadBlogsToCarousel();
+    loadFoundersToCarousel();
+  });
+
+  // Sticky Navigation Bar Behavior
+  let lastScrollTop = 0;
+  let isSticky = false;
+  
+  window.addEventListener('scroll', () => {
+    const header = document.getElementById('mainHeader');
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > 0 && !isSticky) {
+      // When scrolling down and header reaches top, make it sticky
+      header.style.position = 'fixed';
+      header.style.top = '0';
+      header.style.left = '0';
+      header.style.right = '0';
+      header.style.marginTop = '0';
+      isSticky = true;
+    } else if (scrollTop === 0 && isSticky) {
+      // When scrolling back to top, release the sticky behavior
+      header.style.position = 'sticky';
+      header.style.top = '0';
+      header.style.left = 'auto';
+      header.style.right = 'auto';
+      header.style.marginTop = '1rem';
+      isSticky = false;
+    }
+    
+    lastScrollTop = scrollTop;
+  });
+  
+</script>
+
+
+  </body>
+  
+
+
+</html>
+
+
+
+

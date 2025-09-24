@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="forest">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAI</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link href="./dist/output.css" rel="stylesheet" />
+    <link href="index.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Questrial&display=swap" rel="stylesheet">
+    <style>
+      body, html {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          width: 100%;
+          overflow-x: hidden;
+          font-family: 'Questrial', sans-serif;
+          overflow-y: scroll;
+      }
+      html {
+          overflow-y: hidden;
+          scroll-behavior: smooth;
+      }
+      .segment {
+          width: 100%;
+          display: flex;
+          align-items: flex-end;
+          padding: 3%;
+          box-sizing: border-box;
+          position: relative;
+      }
+      .black {
+          background-color: black;
+          color: white;
+          text-align: right;
+          justify-content: flex-end;
+          padding-top: 10%;
+          position: relative;
+      }
+      .black.first {
+          height: 100vh;
+          background-image: url('images/faiWithBlack.JPG');
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
+          position: relative;
+          z-index: 1;
+      }
+      .black.first::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.75);
+          z-index: -1;
+      }
+      .yellow {
+          background-color: #FFDE5A;
+          color: black;
+          text-align: left;
+          justify-content: flex-start;
+          position: relative;
+      }
+      .yellow::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.3);
+          z-index: -1;
+      }
+      .title {
+          font-family: 'Archivo Black', sans-serif;
+          font-size: 2.5em;
+          margin-bottom: 1%;
+          word-wrap: break-word;
+          max-width: 50%;
+      }
+      .body-text {
+          font-size: 1.2em;
+          max-width: 50%;
+          word-wrap: break-word;
+      }
+      .black .title {
+          color: #FFDE5A;
+      }
+      .content-wrapper {
+          max-width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          margin-right: auto;
+      }
+      .black .content-wrapper {
+          align-items: flex-end;
+      }
+      .yellow .content-wrapper {
+          align-items: flex-start;
+      }
+      .video-container {
+          position: relative;
+          width: 100%;
+          padding-top: 56.25%; /* 16:9 Aspect Ratio (iframe video) */
+          margin-top: 0; /* Removed margin */
+          margin-bottom: -17%; /* Added margin */
+      }
+      .video-wrapper {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 70%; /* Adjust width as needed */
+          height: 70%; /* Adjust height as needed */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      }
+      .video-wrapper iframe {
+          width: 100%;
+          height: 100%;
+          border: none;
+      }
+      .video-wrapper-right {
+          right: 0;
+          left: auto;
+      }
+      .icons-container-yellow {
+          background-color: #FFDE5A;
+          border-radius: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 5px;
+          width: fit-content;
+          margin-top: 10px; /* Adjust margin as needed */
+          margin: 1%;
+      }
+      .icons-container-black {
+          background-color: #000000;
+          border-radius: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 5px;
+          width: fit-content;
+          margin-top: 10px; /* Adjust margin as needed */
+          margin: 1%;
+      }
+      .icons {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 10px; /* Added gap between icons */
+      }
+      .icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-decoration: none; /* Ensure no underline for links */
+          color: black; /* Adjust color as needed */
+          position: relative;
+          overflow: hidden;
+      }
+      .icon img {
+          width: 40px;
+          height: 40px;
+          padding: 5px;
+          transition: transform 0.3s ease;
+          z-index: 1;
+      }
+      .icon:hover img {
+          transform: scale(1.2); /* Scale up on hover */
+      }
+      .icon .text {
+          position: absolute;
+          top: 50%;
+          left: 110%;
+          transform: translateY(-50%);
+          background-color: rgba(255, 255, 255, 0.9);
+          padding: 5px 10px;
+          border-radius: 5px;
+          white-space: nowrap;
+          visibility: hidden;
+          opacity: 0;
+          transition: opacity 0.3s, visibility 0s linear 0.3s;
+          z-index: 0;
+      }
+      .icon:hover .text {
+          visibility: visible;
+          opacity: 1;
+          transition-delay: 0s;
+          z-index: 2;
+      }
+      .pages{
+
+transition: transform 0.3s ease-in-out;
+
+}
+
+.pages:hover{
+transform: scale(1.1);
+color: gold;
+}
+  </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      function openMenu() {
+        var elem = document.getElementById("fainavlinks");
+        elem.classList.toggle("hidden");
+        var menu = document.getElementById("fainavlinks-donate");
+        menu.classList.toggle("hidden");
+      }
+      function visitBlakeInterview() {
+        window.open(
+          "https://youtu.be/ogFhUzIh244?si=Tcbc10zcaSBSKgbQ",
+          "_blank"
+        );
+      }
+      function visitFaiYoutube() {
+        window.open(
+          "https://www.youtube.com/@FAI_Club/embed/C8kSrkz8Hz8",
+          "_blank"
+        );
+      }
+      function visitBlakeLinkedIn() {
+        window.open("https://www.linkedin.com/in/blakesiewert", "_blank");
+      }
+      function visitWinstonInterview() {
+        window.open("https://www.youtube.com/watch?v=sSbcx8rg1nc", "_blank");
+      }
+      function visitWinstonLinkedIn() {
+        window.open("https://www.linkedin.com/in/winston-black-069299/", "_blank");
+      }
+      function visitMattInterview() {
+        window.open("https://www.youtube.com/watch?v=CyXfw_J5nlw", "_blank");
+      }
+      function visitMattLinkedIn() {
+        window.open("https://www.linkedin.com/in/mattandersonprofile/", "_blank");
+      }
+    </script>
+  </head>
+  <body>
+    <header
+      id="mainHeader"
+      class="bg-[#ffd35e] sm:flex sm:justify-between rounded-2xl mx-2 mt-4 bg-opacity-75 backdrop-blur-lg sticky top-0 right-0 left-0 z-50 transition-transform duration-300"
+    >
+      <div class="flex items-center justify-between px-4 py-3">
+        <div>
+          <img src="images/failogo.png" alt="FAI" class="h-12" />
+        </div>
+        <div class="sm:hidden">
+          <button onclick="openMenu()" class="text-white sm:hidden">
+            <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+              <path
+                fill-rule="evenodd"
+                d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div id="fainavlinks" class="hidden px-5 pt-2 sm:pb-4 sm:flex">
+        <a
+          href="index.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Home</a
+        >
+        <a
+          href="about.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >About Us</a
+        >
+        <a
+          href="chapters.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Chapters</a
+        >
+        <a
+          href="guest-lectures.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Guest Lectures</a
+        >
+        <a
+          href="blog.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Blog</a
+        >
+        <a
+          href="team.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Our Team</a
+        >
+        <a
+          href="foundersThoughts.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Founder's Thoughts</a
+        >
+        <a
+          href="contact.html"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Contact</a
+        >
+      </div>
+      <div id="fainavlinks-donate" class="hidden px-5 sm:pt-2 pb-4 sm:flex">
+        <a
+          target="_blank"
+          href="https://linktr.ee/FAIorg"
+          class="text-white text-base block sm:inline-block font-light rounded px-2 py-1 mt-3 transition ease-in-out delay-150 duration-300 hover:scale-110"
+          >Join Us</a
+        >
+      </div>
+    </header>
+
+    </div>
+      <div class="segment black first">
+          <div class="content-wrapper">
+              <div class="title">Guest Lectures</div>
+              <div class="body-text">The Finance and Investments Club is committed to providing students the most engaging and empowering resources to propel their learning to the next level. As such, we regularly host lectures with guest speakers that share professional insights into their careers.</div>
+          </div>
+      </div>
+    <div class="segment black">
+          <div class="content-wrapper">
+              <div class="title">Bubbles: Past, Present, and Future</div>
+              <div class="video-container">
+                  <div class="video-wrapper video-wrapper-right">
+                      <iframe src="https://www.youtube.com/embed/ZY_IAR6lt7E" frameborder="0" allowfullscreen></iframe>
+                  </div>                
+              </div>
+              <div class="icons-container-yellow">
+                  <div class="icons">
+                      <a href="https://www.linkedin.com/in/winston-black-069299/" target="_blank" class="icon">
+                          <img src="images/LinkedIn.png" alt="LinkedIn">
+                          <div class="text">View the speaker's profile</div>
+                      </a>
+                      <a href="ttps://www.youtube.com/watch?v=ZY_IAR6lt7E" target="_blank" class="icon">
+                          <img src="images/appYoutube.png" alt="YouTube">
+                          <div class="text">View the lecture</div>
+                      </a>
+                  </div>
+              </div>
+              <div class="body-text">Mr. Kodial is a highly motivated individual with over 30 years of experience in investment and technology, possessing a unique blend of business acumen, technical expertise, and leadership capabilities. He is from India, graduating from the University of Poona with a Bachelor of Science degree in Electronics. In the early 2000s, he held leadership roles in sales and pre-sales at Wipro, maintaining full engagement and billable status on projects with major clients. After, Mr. Kodial transitioned to serve as Chief Data Warehouse Architect and Program Manager at Best Buy, overseeing one of the company's largest customer transformation programs. Then, held an executive position at JCPenney, leading pricing, marketing, and large-scale customer transformation initiatives. In his free time, Mr. Kodial enjoys swimming, tennis, and cooking. Currently residing in Frisco, Texas, he is the father of a Reedy student and graduate.</div>
+          </div>
+      </div>
+      <div class="segment yellow">
+          <div class="content-wrapper">
+              <div class="title">Banking Exploration with Matt Anderson</div>
+              <div class="video-container">
+                  <div class="video-wrapper yellow-border">
+                      <iframe src="https://www.youtube.com/embed/CyXfw_J5nlw" frameborder="0" allowfullscreen></iframe>
+                  </div>
+              </div>
+              <div class="icons-container-black">
+                  <div class="icons">
+                      <a href="https://www.linkedin.com/in/pratik-kodial/" target="_blank" class="icon">
+                          <img src="images/LinkedIn.png" alt="LinkedIn">
+                          <div class="text">View the speaker's profile</div>
+                      </a>
+                      <a href="https://www.youtube.com/embed/CyXfw_J5nlw" target="_blank" class="icon">
+                          <img src="images/appYoutube.png" alt="YouTube">
+                          <div class="text">View the lecture</div>
+                      </a>
+                  </div>
+              </div>
+              <div class="body-text">FAI hosted its third guest lecture with Matt Anderson, a Senior Vice President at Wells Fargo Private Bank, at Reedy High School. Our members had the opportunity to learn about the various career pathways open within the banking industry, how to break through in the competitive banking industry, and what the overall banking industry was like.</div>
+          </div>
+      </div>
+      <div class="segment black">
+          <div class="content-wrapper">
+              <div class="title">So You Want to be The Boss? with Winston Black</div>
+              <div class="video-container">
+                  <div class="video-wrapper video-wrapper-right">
+                      <iframe src="https://www.youtube.com/embed/sSbcx8rg1nc" frameborder="0" allowfullscreen></iframe>
+                  </div>                
+              </div>
+              <div class="icons-container-yellow">
+                  <div class="icons">
+                      <a href="https://www.linkedin.com/in/winston-black-069299/" target="_blank" class="icon">
+                          <img src="images/LinkedIn.png" alt="LinkedIn">
+                          <div class="text">View the speaker's profile</div>
+                      </a>
+                      <a href="https://www.youtube.com/embed/sSbcx8rg1nc" target="_blank" class="icon">
+                          <img src="images/appYoutube.png" alt="YouTube">
+                          <div class="text">View the lecture</div>
+                      </a>
+                  </div>
+              </div>
+              <div class="body-text">FAI's second guest lecture was with Mr. Winston Black, Founder and Former CEO of SWK Holdings. Mr. Black is a senior life science executive with extensive finance, operational, and entrepreneurial experience. He co-founded SWK Holdings, a Nasdaq-listed life science finance company, in 2012 and served as CEO and Chairman. Previously, he was a partner at PBS Capital Management and held roles at Highland Capital Management, Mallette Capital Management, and ATX Communications. Mr. Black holds MBAs from Columbia Business School and London Business School and a BA in Economics from Duke University.</div>
+          </div>
+      </div>        
+      <div class="segment yellow">
+          <div class="content-wrapper">
+              <div class="title">Value Squared with Blake Siewert</div>
+              <div class="video-container">
+                  <div class="video-wrapper yellow-border">
+                      <iframe src="https://www.youtube.com/embed/ogFhUzIh244" frameborder="0" allowfullscreen></iframe>
+                  </div>
+              </div>
+              <div class="icons-container-black">
+                  <div class="icons">
+                      <a href="https://www.linkedin.com/in/blakesiewert/" target="_blank" class="icon">
+                          <img src="images/LinkedIn.png" alt="LinkedIn">
+                          <div class="text">View the speaker's profile</div>
+                      </a>
+                      <a href="https://www.youtube.com/embed/ogFhUzIh244" target="_blank" class="icon">
+                          <img src="images/appYoutube.png" alt="YouTube">
+                          <div class="text">View the lecture</div>
+                      </a>
+                  </div>
+              </div>
+              <div class="body-text">In our first guest lecture of the year, we were honored to host Mr. Blake Siewert, the Managing Director at CIBC. Mr. Siewert has extensive experience in finance, including over six years at CIBC and nearly 15 years at J.P. Morgan. During the session, he shared insights on career development in finance, navigating industry challenges, and the importance of networking and continuous learning. The lecture provided valuable knowledge for anyone aspiring to build a career in finance.</div>
+          </div>
+      </div>
+
+      <script>
+        // Sticky Navigation Bar Behavior
+        let lastScrollTop = 0;
+        let isSticky = false;
+        
+        window.addEventListener('scroll', () => {
+          const header = document.getElementById('mainHeader');
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          
+          if (scrollTop > 0 && !isSticky) {
+            // When scrolling down and header reaches top, make it sticky
+            header.style.position = 'fixed';
+            header.style.top = '0';
+            header.style.left = '0';
+            header.style.right = '0';
+            header.style.marginTop = '0';
+            isSticky = true;
+          } else if (scrollTop === 0 && isSticky) {
+            // When scrolling back to top, release the sticky behavior
+            header.style.position = 'sticky';
+            header.style.top = '0';
+            header.style.left = 'auto';
+            header.style.right = 'auto';
+            header.style.marginTop = '1rem';
+            isSticky = false;
+          }
+          
+          lastScrollTop = scrollTop;
+        });
+      </script>
+
+      <footer style="background-color: rgba(41, 37, 37, 0.48); padding: 100px;">
+        <div style="display: flex; justify-content: space-between; margin: 0 auto; max-width: 1200px;">
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <img src="images/favicon.ico" alt="FAI Logo" style="height: 125px; margin-bottom: 40px;"/>
+            <div style="display: flex; justify-content: center; gap: 16px;">
+              <a href="https://www.youtube.com/@FAI_Club" target="_blank">
+                <img src="images/icon-youtube.svg" alt="YouTube" style="height: 32px;" />
+              </a>
+              <a href="https://www.linkedin.com/company/fai-org/" target="_blank">
+                <img src="images/linkedin.jpg" alt="LinkedIn" style="height: 32px;" />
+              </a>
+              <a href="https://www.instagram.com/fai.club/" target="_blank">
+                <img src="images/Instagram Logo 2.png" alt="Instagram" style="height: 32px;" />
+              </a>
+            </div>
+          </div>
+      
+          <div style="text-align: right;">
+            <h2 style="font-family: 'Archivo Black', sans-serif; font-size: 2.5em; margin-bottom: 0.5em; color: #FFDE5A;">Pages</h2>
+            <div style="display: flex; gap: 64px;">
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <a href="index.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Home</a>
+                <a href="team.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Our Team</a>
+                <a href="contact.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Contact</a>
+                <a href="chapters.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Chapters</a>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <a href="guest-lectures.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Guest Lectures</a>
+                <a href="blog.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">Blog</a>
+                <a href="about.html" style="color: white; font-size: large; text-decoration: none; transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.1)'; this.style.color='gold';" onmouseout="this.style.transform='scale(1)'; this.style.color='white';">About Us</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      </body>
+</html>
